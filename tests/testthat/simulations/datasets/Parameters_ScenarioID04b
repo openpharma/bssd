@@ -1,0 +1,34 @@
+MAX_INT <- 2^31
+seed <- 1697686368
+num_sims <- 1
+output_stan_bssd_fits <- FALSE
+
+trial_data <- tibble(
+  sample_size = c(50, 50, 50, 100, 100, 100, 200, 200, 200),
+  follow_up_time = c(0.5, 1, 1.5, 0.5, 1, 1.5, 0.5, 1, 1.5),
+  lambda = c(0.05, 0.1, 0.15, 0.05, 0.1, 0.15, 0.05, 0.1, 0.15)
+) %>% mutate(trial_id = as.integer(rownames(.)))
+get_time_func <- complete_follow_up
+get_time_func_hist <- complete_follow_up
+get_prob_func <- get_prob_constant_hazard
+get_prob_func_active <- get_prob_constant_hazard
+
+get_hist_data_func <- get_patient_level_hist_data
+patient_level <- TRUE
+
+n_control <- 125
+lambda_control <- 0.1
+n_active <- 375
+lambda_active <- 0.1
+
+follow_up_time <- 1
+
+# Hyperprior parameters for historical analysis
+a_alpha <- 1 / 3
+a_beta <- 1 / 3
+b_alpha <- 5
+b_beta <- 5
+
+# Prior parameters for active arm in current analysis
+active_alpha <- 1 / 3
+active_beta <- 1 / 3

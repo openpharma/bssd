@@ -1,0 +1,40 @@
+#' Fit mixture distribution.
+#'
+#' @description Expectation-Maximization (EM) based fitting of beta
+#' mixture densities to numerical samples. Note that the default value for the
+#' optional parameter \code{constrain_gt1} is set to FALSE, and that the default
+#' value for the optional parameter \code{k} is set to 2. These values specify
+#' that the EM algorithm will not constrain all beta parameters \code{a} and
+#' \code{b} to be greater than 1, and that the standard AIC definition algorithm
+#' will be used. Those settings have been chosen because they match with the
+#' default settings in the corresponding SAS function.
+#'
+#' @param sample Object of type \code{bssd_binary_map}.
+#' @param ... extra parameters are passed to \code{\link[RBesT]{automixfit}}.
+#'
+#' @return object of type \code{\link[RBesT]{mix}}.
+#'
+#' @importFrom RBesT automixfit
+#'
+#' @export
+#'
+#' @examples
+#' # Generate prior
+#' set.seed(2021)
+#' H <- 10
+#' time <- 0.5 + cumsum(rexp(H, 5))
+#' # Use constant hazard model:
+#' hazard <- 0.15
+#' prob <- 1 - exp(- hazard * time)
+#' n <- rpois(H, lambda = 100 * time)
+#' y <- rbinom(H, size = n, prob = prob)
+#' x <- stan_map_summary_data(y = y, n = n, time = time,
+#'                            a_alpha = 1 / 3, a_beta = 1 / 3,
+#'                            b_alpha = 5, b_beta = 5)
+#'
+#' # Fit mixture to MCMC samples of MAP prior
+#' mix <- fit_mixture(x)
+#' mix
+fit_mixture <- function(sample, ...) {
+  automixfit(sample$pi_star, type = "beta", constrain_gt1 = FALSE, k = 2, ...)
+}

@@ -1,0 +1,278 @@
+---
+title: "1. Specifying priors"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{1. Specifying priors}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  message = FALSE,
+  warning = FALSE
+)
+```
+
+```{r setup}
+library(bssd)
+```
+
+## MAP method for generating a prior from historical studies with patient-level data
+<a id="map-prior"></a>
+Let us create some patient-level historical study data for $N=100$ placebo patients collected from 5 studies.
+
+```{r}
+set.seed(2024)
+N <- 100
+trial <- sample(1:5, size = N, replace = TRUE)
+time <- 0.4 * trial + rexp(N, 20) # Later studies were longer
+hazard <- 0.15
+prob <- 1 - exp(- hazard * time)
+y <- rbinom(N, size = 1, prob = prob)
+```
+
+```{r}
+library(dplyr)
+
+hist_df <- tibble(trial, y, time, prob)
+hist_df %>%
+  group_by(trial) %>%
+  summarise(
+    mean_prob = mean(prob),
+    events = sum(y),
+    n = n(),
+    event_rate = mean(y),
+    mean_tar = mean(time),
+    .groups = "drop"
+  )
+```
+
+We see that in this example, all studies are fairly small but later studies are longer and therefore see more adverse events.
+Nevertheless, the hazard in all studies is 0.15 so that the true $\pi_j$ in each study is:
+
+```{r}
+1 - exp(-hazard)
+```
+
+We can attempt to recover these quantities by fitting the above meta-analytic model using `bssd`:
+
+```{r pl_map, cache=TRUE}
+x <- stan_map_patient_data(y = y, trial = trial, time = time,
+  a_alpha = 1 / 3, a_beta = 1 / 3, b_alpha = 5, b_beta = 5,
+  refresh = 0, seed = 2024)
+```
+
+The `refresh = 0` parameter suppresses sampling messages from Stan. Note that the seed setting for R and Stan are independent, so setting seed for both R and Stan are necessary for reproducible results. 
+
+We provided hyperpriors $a \sim Beta(1/3, 1/3)$ and $b \sim Beta(5, 5)$.
+The prior on $a$ is uninformative.
+The prior on $b$ suggests that we expect 50% borrowing, with associated 95% credible interval $(0.21, 0.79)$.
+
+The returned object contains the Stan model fit:
+
+```{r}
+print(x$fit)
+```
+
+The $\pi_j$ terms are reflected by the `pi_h` variables in the Stan model.
+From the forest plot:
+
+```{r}
+forest_plot(x)
+```
+
+we see that:
+
+* the study-specific means are close to the true value;
+* the MAP mean is also close to the true value;
+* the MAP distribution is slightly wider than the individual study distribution (the additional uncertainty arises from study-to-study variability).
+
+Given that the underlying Stan model fit is provided, the usual routines and methods useful for Stan fits are available to us.
+For example, to produce a trace-plot:
+
+```{r}
+rstan::traceplot(x$fit, pars = c("avg", "ess"))
+```
+
+At this point, our beliefs are represented by MCMC samples.
+To use those beliefs as a prior in a future analysis, we must represent them using known analytical distributions.
+The chances of one particular distribution adequately representing those samples is slim, so we can fit a finite mixture distribution:
+
+```{r}
+mix <- fit_mixture(x)
+```
+
+Note that in the `fit_mixture()` function, the default settings are set to `constrain_gt1 = FALSE` and `k=2`. This means that the constraints requiring all parameters a & b to be greater than 1 are turned off, and a value of 2 is used for the AIC penalty parameter. These defaults are chosen to align with the corresponding defaults in the SAS function. 
+
+We see that the mixture (solid line) fits the samples (histogram) well:
+```{r}
+mix_p <- plot(mix)
+mix_p$mix
+```
+
+We can inspect the mixture components:
+```{r}
+mix
+```
+
+Our prior has mean:
+
+```{r}
+sum(mix[1, ] * mix[2, ] / (mix[2, ] + mix[3, ]))
+```
+
+We can pass a `Nc` parameter to `fit_mixture()`  to define the number of components in the mixture. For example, to enforce a single beta distribution, we use:
+
+```{r}
+fit_mixture(x, Nc = 1)
+```
+
+
+## MAP method for generating a prior from historical studies with summary-level data
+The above assumes we had patient-level data for historical studies.
+This may not always be the case, e.g. for external studies.
+We could also have generated the MAP distribution using summary-level data.
+In that situation, the best we can do is to assume the patient-level time-at-risk is some constant value.
+Let us assume for the purposes of illustration, that the time-at-risk can be adequately represented by the average of the patient-level times in each historical study, we have:
+
+```{r}
+summ_df <- hist_df %>%
+  group_by(trial) %>%
+  summarise(
+    y = sum(y),
+    n = n(),
+    time = mean(time),
+    .groups = "drop"
+  )
+```
+
+The model fit to summary-level data uses a different function:
+```{r, cache=TRUE}
+x2 <- stan_map_summary_data(y = summ_df$y, n = summ_df$n, time = summ_df$time,
+  a_alpha = 1 / 3, a_beta = 1 / 3, b_alpha = 5, b_beta = 5, refresh = 0)
+forest_plot(x2)
+```
+
+This yields similar inferences to those noted above, with final prior:
+
+```{r}
+mix2 <- fit_mixture(x2)
+mix2
+```
+
+i.e. a Beta mixture with mean:
+
+```{r}
+sum(mix2[1, ] * mix2[2, ] / (mix2[2, ] + mix2[3, ]))
+```
+
+To force a single beta distribution, we run:
+
+```{r}
+fit_mixture(x2, Nc = 1)
+```
+
+
+## Chi-squared prior from historical studies with summary-level data
+
+The chi-squared method can only use summary level data, i.e. it makes no use of patient-level follow-up times.
+Generally speaking, there will be heterogeneity in times at risk across and between trials.
+I.e. different trials treat for differing lengths of time, and patients within trials sometimes diverge from the protocol. 
+How we go from patient-level data to summary-level data is a topic for debate, and many of the factors relating to the general problem of missing data in trials are pertinent.
+We demonstrate two possible methods:
+
+1. a _standardized counts approach_;
+2. a _mean-time approach_.
+
+Naturally other proposals are also available.
+
+### Standardized counts approach
+In the _standardized counts approach_, the patient counts are adjusted to reflect how the realised proportion of intended follow-up differs from actual follow-up, e.g. a patient that has undergone only 50% of the intended follow-up contributes 0.5 to the sample size in this approach.
+
+```{r}
+target_time <- 0.4 * trial + 1 / 20
+summ_df <-  tibble(trial, y, time, target_time, prob) %>%
+  mutate(t_prop = ifelse(time / target_time > 1, 1, time / target_time)) %>% 
+  group_by(trial, time = target_time) %>%
+  summarise(
+    y = sum(y),
+    n = sum(t_prop),
+    n_unadj = n(),
+    .groups = "drop"
+  )
+
+summ_df
+```
+
+Transitioning from patient-level to summary-level data in this way, we can calculate a prior using the chi-squared method:
+
+```{r}
+sc_prior <- chi_squ_prior(
+  y = summ_df$y,
+  n  = summ_df$n,
+  time = summ_df$time,
+  time_std = 1,
+  verbose = TRUE
+)
+
+sc_prior
+```
+
+The prior has mean:
+
+```{r}
+with(sc_prior, alpha / (alpha + beta))
+```
+
+and effective sample size:
+
+```{r}
+with(sc_prior, alpha + beta)
+```
+
+### Mean-time approach
+In contrast, under the _mean-time approach_, the patient counts are unadjusted (i.e. they are taken as observed), but each patient is assumed to have spent the average time at risk for the trial in which they took part:
+
+```{r}
+summ_df <- hist_df %>%
+  group_by(trial) %>%
+  summarise(
+    y = sum(y),
+    n = n(),
+    time = mean(time),
+    .groups = "drop"
+  )
+
+summ_df
+```
+
+This yields a Beta prior:
+
+```{r}
+mt_prior <- chi_squ_prior(
+  y = summ_df$y,
+  n  = summ_df$n,
+  time = summ_df$time,
+  time_std = 1,
+  verbose = TRUE
+)
+
+mt_prior
+```
+
+with mean:
+
+```{r}
+with(mt_prior, alpha / (alpha + beta))
+```
+
+and effective sample size:
+
+```{r}
+with(mt_prior, alpha + beta)
+```
+
+The two approaches for summarising historical trials with incomplete follow-up produce fairly similar priors in this contrived example, but that is not always the case.
