@@ -1,0 +1,78 @@
+Package: bssd
+Title: Bayesian Safety Signal Detection with R
+Version: 0.5.0.9000
+Authors@R: 
+    c(
+    person(given = "Kristian",
+           family = "Brock",
+           role = c("aut"),
+           email = "kristian.brock@gmail.com",
+           comment = c(ORCID = "0000-0002-3921-0166")),
+    person(given = "Chen",
+           family = "Chen",
+           role = c("aut"),
+           email = "chen.chen@ucb.com"),
+    person(given = "Greg",
+           family = "Fuller",
+           role = c("aut"),
+           email = "greg.fuller@ucb.com"),
+    person(given = "Marianna",
+           family = "Grinberg",
+           role = c("aut"),
+           email = "marianna.grinberg@ucb.com"),
+    person(given = "Jesus",
+           family = "Minguez",
+           role = c("aut"),
+           email = "jesus.minguez@ucb.com"),
+    person(given = "Iolo",
+           family = "Williams",
+           role = c("aut"),
+           email = "iolo.williams@ucb.com"),
+    person(given = "Nils",
+           family = "Penard",
+           role = c("aut", "cre"),
+           email = "nils.penard@ucb.com"),
+    person("UCB S.A., Belgium", role = c("cph", "fnd"))
+    )
+Description: Fits Bayesian models to analyze safety signals in clinical trial 
+    datasets, including meta-analytic methods.
+License: Apache License (>= 2)
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
+Biarch: true
+Depends: 
+    R (>= 4.1.0)
+Imports: 
+    methods,
+    Rcpp (>= 0.12.0),
+    RcppParallel (>= 5.0.1),
+    rstan (>= 2.18.1),
+    rstantools (>= 2.1.1),
+    RBesT,
+    dplyr,
+    forcats,
+    ggplot2,
+    magrittr,
+    tidyr,
+    purrr,
+    stringr,
+    tibble,
+    HDInterval
+LinkingTo: 
+    BH (>= 1.66.0),
+    Rcpp (>= 0.12.0),
+    RcppEigen (>= 0.3.3.3.0),
+    RcppParallel (>= 5.0.1),
+    rstan (>= 2.18.1),
+    StanHeaders (>= 2.18.0)
+SystemRequirements:
+    GNU make
+Suggests: 
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+VignetteBuilder: knitr
+Contact: Nils Penard [nils.penard@ucb.com]
