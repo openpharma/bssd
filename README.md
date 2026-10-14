@@ -4,7 +4,12 @@
 bssd: Bayesian Safety Signal Detection with R
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/openpharma/bssd/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/openpharma/bssd/actions/workflows/R-CMD-check.yaml)
+[![pkgdown](https://github.com/openpharma/bssd/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/openpharma/bssd/actions/workflows/pkgdown.yaml)
+[![status: active](https://github.com/GIScience/badges/raw/master/status/active.svg)](https://github.com/GIScience/badges#active)
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE.md)
 <!-- badges: end -->
+
 Sponsors have a responsibility to minimize risk to participants in clinical studies through safety monitoring. The FDA Final Rule for IND Safety Reporting requires routine aggregate safety evaluation, including in ongoing blinded studies. The `bssd` package provides tools to conduct Bayesian Safety Signal Detection (BSSD) analyses in two-arm randomized controlled studies, including both blinded and unblinded studies.
 
 ## Introduction
@@ -31,13 +36,13 @@ In the context of this documentation, the terms *control* and *placebo* are used
 
 ## For additional information
 
-Please see [Article 1 - Specifying priors](articles/article-1-priors.html) for generating priors from historical studies.
+Please see [Article 1 - Specifying priors](https://openpharma.github.io/bssd/articles/article-1-priors.html) for generating priors from historical studies.
 
-Please see [Article 2 - BSSD on a blinded ongoing study](articles/article-2-blinded_bssd.html) for performing BSSD analysis on blinded ongoing studies.
+Please see [Article 2 - BSSD on a blinded ongoing study](https://openpharma.github.io/bssd/articles/article-2-blinded_bssd.html) for performing BSSD analysis on blinded ongoing studies.
 
-Please see [Article 3 - BSSD on an unblinded ongoing study](articles/article-3-unblinded_bssd.html) for performing BSSD analysis on unblinded ongoing studies.
+Please see [Article 3 - BSSD on an unblinded ongoing study](https://openpharma.github.io/bssd/articles/article-3-unblinded_bssd.html) for performing BSSD analysis on unblinded ongoing studies.
 
-Please see [Article 4 - Methods](articles/article-4-methods.html) for additional information about the BSSD methodology.
+Please see [Article 4 - Methods](https://openpharma.github.io/bssd/articles/article-4-methods.html) for additional information about the BSSD methodology.
 
 ## References
 
