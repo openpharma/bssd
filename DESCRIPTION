@@ -37,6 +37,11 @@ Authors@R:
 Description: Fits Bayesian models to analyze safety signals in clinical trial 
     datasets, including meta-analytic methods.
 License: Apache License (>= 2)
+URL: https://openpharma.github.io/bssd/
+BugReports: https://github.com/openpharma/bssd/issues/
+NeedsCompilation: yes
+SystemRequirements:
+    GNU make
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
@@ -67,8 +72,6 @@ LinkingTo:
     RcppParallel (>= 5.0.1),
     rstan (>= 2.18.1),
     StanHeaders (>= 2.18.0)
-SystemRequirements:
-    GNU make
 Suggests: 
     knitr,
     rmarkdown,
