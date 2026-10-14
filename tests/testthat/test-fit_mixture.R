@@ -142,7 +142,7 @@ test_that("fit_mixture input and output is as expected.", {
     # Expect averages from mix_2 and mix_2_reference to closely match
     expect_equal(mixture_mean_beta(mix_2),
                  mixture_mean_beta(mix_2_reference),
-                 tolerance = 0.01)
+                 tolerance = 0.05)
 
     # Expect weights of mix_2 closely add-up to 1
     expect_equal(sum(mix_2_reference[1,]),

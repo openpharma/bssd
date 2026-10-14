@@ -70,6 +70,9 @@ in stan. If a reproducible output is desired, then the optional parameter
 parameter, see \code{\link[rstan]{sampling}}.
 }
 \examples{
+# Use a short MCMC run for this illustrative example.
+check_iter <- 500
+check_chains <- 1
 # Create prior
 set.seed(2021)
 H <- 10
@@ -81,7 +84,9 @@ n <- rpois(H, lambda = 100 * time_0)
 y <- rbinom(H, size = n, prob = prob_0)
 x <- stan_map_summary_data(y = y, n = n, time = time_0,
                            a_alpha = 1 / 3, a_beta = 1 / 3,
-                           b_alpha = 5, b_beta = 5)
+                           b_alpha = 5, b_beta = 5,
+                           iter = check_iter, chains = check_chains,
+                           refresh = 0)
 
 # Use prior in blinded BSSD analysis
 prob_arm1 <- 0.333
@@ -104,12 +109,14 @@ pi2_alpha <- as.array(c(0.3))
 pi2_beta <- as.array(c(0.3))
 fit1 <- stan_bssd(y = y, time = time, prob_arm1 = prob_arm1,
                   w1 = w1, pi1_alpha = pi1_alpha, pi1_beta = pi1_beta,
-                  w2 = w2, pi2_alpha = pi2_alpha, pi2_beta = pi2_beta)
+                  w2 = w2, pi2_alpha = pi2_alpha, pi2_beta = pi2_beta,
+                  iter = check_iter, chains = check_chains, refresh = 0)
 fit1
 
 # Use the same prior in an unblinded BSSD analysis
 fit2 <- stan_bssd(y = y, time = time, tmt = tmt,
                   w1 = w1, pi1_alpha = pi1_alpha, pi1_beta = pi1_beta,
-                  w2 = w2, pi2_alpha = pi2_alpha, pi2_beta = pi2_beta)
+                  w2 = w2, pi2_alpha = pi2_alpha, pi2_beta = pi2_beta,
+                  iter = check_iter, chains = check_chains, refresh = 0)
 fit2
 }
