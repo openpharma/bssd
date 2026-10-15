@@ -20,6 +20,9 @@ ggplot plot.
 Create a forest-plot of MAP analysis.
 }
 \examples{
+# Use a short MCMC run for this illustrative example.
+check_iter <- 500
+check_chains <- 1
 set.seed(2021)
 N <- 100
 time <- 0.5 + cumsum(rexp(N, 100))
@@ -30,7 +33,9 @@ y <- rbinom(N, size = 1, prob = prob)
 trial <- sample(1:5, size = N, replace = TRUE)
 x <- stan_map_patient_data(y = y, trial = trial, time = time,
                            a_alpha = 1 / 3, a_beta = 1 / 3,
-                           b_alpha = 5, b_beta = 5)
+                           b_alpha = 5, b_beta = 5,
+                           iter = check_iter, chains = check_chains,
+                           refresh = 0)
 forest_plot(x)
 forest_plot(x, alpha = 0.1)
 }

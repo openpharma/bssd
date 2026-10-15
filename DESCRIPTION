@@ -35,8 +35,15 @@ Authors@R:
     person("UCB S.A., Belgium", role = c("cph", "fnd"))
     )
 Description: Fits Bayesian models to analyze safety signals in clinical trial 
-    datasets, including meta-analytic methods.
+    datasets, including meta-analytic methods. 
+    For more details see 
+    Kristian Brock, Chen Chen, Shuyen Ho, Greg Fuller, Jared Woolfolk, Cindy McShea and Nils Penard (2023) doi:10.1002/pst.2278.
 License: Apache License (>= 2)
+URL: https://openpharma.github.io/bssd/
+BugReports: https://github.com/openpharma/bssd/issues/
+NeedsCompilation: yes
+SystemRequirements:
+    GNU make
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
@@ -67,8 +74,6 @@ LinkingTo:
     RcppParallel (>= 5.0.1),
     rstan (>= 2.18.1),
     StanHeaders (>= 2.18.0)
-SystemRequirements:
-    GNU make
 Suggests: 
     knitr,
     rmarkdown,

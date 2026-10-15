@@ -46,9 +46,9 @@
 #' # Note: Set seed for reproducible graph.
 #' set.seed(2021)
 #' approx_bssd_graph(
-#'   time = 229, prob_arm1 = 1 / 3,
+#'   time = 80, prob_arm1 = 1 / 3,
 #'   pi1_alpha = 151.3025005, pi1_beta = 1784.3675521, pi2_alpha = 0.3,
-#'   pi2_beta = 0.3, num_samples = 8000
+#'   pi2_beta = 0.3, num_samples = 1000
 #' )
 approx_bssd_graph <- function(time,
                               prob_arm1,
