@@ -46,7 +46,7 @@ Please see [Article 4 - Methods](https://openpharma.github.io/bssd/articles/arti
 
 ## References
 
-Brock K, Chen C, Ho S, Fuller G, Woolfolk J, McShea C, Penard N. A Bayesian Method for Safety Signal Detection in Ongoing Blinded Randomised Controlled Trials. Pharmaceutical Statistics 2022;22:378–395. <https://doi.org/10.1002/pst.2278>.
+Brock K, Chen C, Ho S, Fuller G, Woolfolk J, McShea C, Penard N. A Bayesian Method for Safety Signal Detection in Ongoing Blinded Randomised Controlled Trials. Pharmaceutical Statistics 2023; 22(2): 378-395. <https://doi.org/10.1002/pst.2278>.
 
 ## Acknowledgements
 
