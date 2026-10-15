@@ -1,0 +1,154 @@
+# 4. Methods
+
+### MAP method for generating a prior from historical data
+
+As detailed in Brock *et al.* (2022), the core model used in this
+package is:
+
+``` math
+\log{(-\log{(1 - \pi_{ij})})} = \alpha_{j} + \log{(T_{ij})}
+```
+
+where $`\pi_{ij}`$ is the probability of event in study $`j`$, adjusted
+for the time-at-risk of patient $`i`$, $`T_{ij}`$. This model is
+equivalent to:
+
+``` math
+\log(\lambda_{j}) = \alpha_{j}
+```
+
+where
+
+``` math
+\lambda_{j} = -\log(1 - \pi_{ij}) / T_{ij}
+```
+
+is the hazard of event, assumed constant through time. We have a
+regression model, where the values $`\lambda_j`$ must be best derived to
+fit the aggregate patients in each study.
+
+Let $`\pi_{j}`$ be the probability of event *in unit time* in study
+$`j`$. Then the relation $`\lambda_j = -\log(1 - \pi_j)`$ yields
+$`\pi_j = 1 - \exp(-\lambda_j)`$.
+
+If we apply the hierarchical distribution:
+
+``` math
+\pi_{j} \sim Beta(abN, (1-a)bN)
+```
+
+where $`N`$ is the total number of patients in the historical studies,
+and $`a`$ and $`b`$ are hyperparameters, we have a random-effects model
+that assumes the event probabilities in unit time are exchangeable
+across studies.
+
+To illustrate the role of $`a`$ and $`b`$, consider that the effective
+sample size of this distribution is $`abN + (1-a)bN = bN`$, i.e., $`b`$
+is a discount to the historical data, taking values on $`(0, 1)`$.
+Furthermore, the mean of this distribution is $`abN / bN = a`$. Thus,
+$`a`$ is the expected probability of event in unit time, and once again
+$`a`$ is bound to the range $`(0, 1)`$. Hyperpriors
+$`a \sim Beta(a_\alpha, a_\beta)`$ and
+$`b \sim Beta(b_\alpha, b_\beta)`$ are natural choices to enforce these
+ranges.
+
+The parameter of interest is $`\pi^* \sim Beta(abN, (1-a)bN)`$. We then
+use $`p(a)`$ and $`p(b)`$ (the distributions of $`a`$ and $`b`$) to
+derive unconditional distribution of $`\pi^*`$:
+
+``` math
+p(\pi^*) = \int \int p(\pi^* |\, a, b) \, p(a) \, p(b) \, da \, db
+```
+
+This distribution will serve as an informative prior on the event
+probability in unit time under placebo in the current study. In
+practice, this distribution is observable only as MCMC samples, to which
+a beta mixture distribution is fit to obtain a tractable analytical
+prior to be used in further analysis.
+
+If data is available, an analogous method can be used to create a prior
+for the active arm in the current study. Alternatively, an uninformative
+prior could be used for the active arm.
+
+### Chi-squared method for generating a prior from historical data
+
+We might wish to use an alternative method to specify a prior. In the
+so-called *chi-squared method*, we iteratively use a chi-squared test to
+detect heterogeneity in the adverse event rates in the historical
+studies.
+
+A complication to using this method is that the historical studies will
+generally have been conducted for different lengths of time. To test for
+heterogeneity in the historical studies, we require that the adverse
+event rates are standardized in some sense, to ensure valid
+comparability.
+
+Let the number of patients in historical study $`j`$ be $`n_j`$, with
+$`y_j`$ experiencing at least one instance of an adverse event of
+interest. The naive event rates $`r_j = y_j / n_j`$ will be affected by
+the length of time patients received therapy (i.e. were at risk) in
+trial $`j`$, $`t_j`$. To adjust for this, we calculate the standardized
+event counts that would be expected had each trial used time-at-risk,
+$`t^*`$:
+
+``` math
+y^*_j = n_j \left(1 - \left(1 - \left( \frac{y_j}{n_j} \right) \right)^{t^* / t_j} \right)
+```
+
+After this transformation, the standardized event rates
+$`r_j^* = y_j^* / n_j`$ will be comparable because they each express a
+rate over a period $`t^*`$. We then test for a heterogeneity in the
+$`y_j^*`$ and $`n_j`$ pairs using a chi-squared test. If this test
+rejects the null hypothesis of homogeneity, we remove the trial $`j`$
+that appears to be the largest outlier (i.e. the number of events is
+furthest from that which is expected), and re-run the test. If this test
+does not reject the null, we effectively infer homogeneity and take
+$`\sum_{j} y_j^*`$ and $`\sum_{j} n_j - y_j^*`$ as the two shape
+parameters for a Beta prior distribution on the event rate in the
+ongoing study.
+
+As above, we generally use this method to create a prior on the event
+rate in the placebo arm but the same approach could be used to create a
+prior on the experimental arm.
+
+### BSSD analysis for an ongoing study
+
+We use equivalent model forms to those introduced above to conduct the
+Bayesian safety signal analysis in an ongoing or current study:
+
+``` math
+\log{(-\log{(1 - \pi_A)})} = \alpha_A + \log{(T_{j})}
+```
+
+and
+
+``` math
+\log{(-\log{(1 - \pi_C)})} = \alpha_C + \log{(T_{j})}
+```
+
+where $`\pi_A`$ is the probability of adverse event in unit time under
+the active therapy, $`\pi_C`$ is the same under placebo therapy, and
+$`T_j`$ is time-at-risk for patient $`j`$ (allocated to a possibly
+unknown therapy). We can place priors on $`\pi_A`$ and $`\pi_C`$ using
+the MAP method above if data is available and an informative prior is
+desirable. Naturally, other methods are available. For the active arm,
+we might prefer a traditional uninformative prior.
+
+Fitting this model is relatively simple when we know the treatment
+allocations. It is more complex, however, to fit this model in a blinded
+setting, where the treatment allocations are unknown. To overcome this,
+we use a mixture likelihood where each patient is considered to have
+been potentially allocated to the active and placebo treatments,
+weighted by the known randomisation probabilities. The `bssd` package
+handles this complication for you.
+
+From a Bayesian perspective, we conclude a safety signal exists if
+
+``` math
+ Prob(\pi_A > \pi_C | X) > \gamma_0
+```
+
+where $`X`$ represents the interim study data, and $`\gamma_0`$ is a
+critical threshold between 0 and 1. Greater values of $`\gamma_0`$
+reflect that greater certainty is required to conclude a safety signal
+exists.
