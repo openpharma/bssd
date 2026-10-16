@@ -11,7 +11,8 @@
 <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
 <link rel="icon" sizes="any" href="../favicon.ico">
 <link rel="manifest" href="../site.webmanifest">
-<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- katex math --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script><script src="../katex-auto.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
@@ -79,9 +80,8 @@
 patient-level data<a class="anchor" aria-label="anchor" href="#map-method-for-generating-a-prior-from-historical-studies-with-patient-level-data"></a>
 </h2>
 <p><a id="map-prior"></a> Let us create some patient-level historical
-study data for
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>=</mo><mn>100</mn></mrow><annotation encoding="application/x-tex">N=100</annotation></semantics></math>
-placebo patients collected from 5 studies.</p>
+study data for <span class="math inline">N=100</span> placebo patients
+collected from 5 studies.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">2024</span><span class="op">)</span></span>
 <span><span class="va">N</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
@@ -114,9 +114,7 @@ placebo patients collected from 5 studies.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>     5    0.264       4    15     0.267     2.04</span></span></code></pre></div>
 <p>We see that in this example, all studies are fairly small but later
 studies are longer and therefore see more adverse events. Nevertheless,
-the hazard in all studies is 0.15 so that the true
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>π</mi><mi>j</mi></msub><annotation encoding="application/x-tex">\pi_j</annotation></semantics></math>
-in each study is:</p>
+the hazard in all studies is 0.15 so that the true <span class="math inline">\pi_j</span> in each study is:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">exp</a></span><span class="op">(</span><span class="op">-</span><span class="va">hazard</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0.139292</span></span></code></pre></div>
@@ -130,17 +128,11 @@ meta-analytic model using <code>bssd</code>:</p>
 from Stan. Note that the seed setting for R and Stan are independent, so
 setting seed for both R and Stan are necessary for reproducible
 results.</p>
-<p>We provided hyperpriors
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>∼</mo><mi>B</mi><mi>e</mi><mi>t</mi><mi>a</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mi>/</mi><mn>3</mn><mo>,</mo><mn>1</mn><mi>/</mi><mn>3</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">a \sim Beta(1/3, 1/3)</annotation></semantics></math>
-and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>b</mi><mo>∼</mo><mi>B</mi><mi>e</mi><mi>t</mi><mi>a</mi><mo stretchy="false" form="prefix">(</mo><mn>5</mn><mo>,</mo><mn>5</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">b \sim Beta(5, 5)</annotation></semantics></math>.
-The prior on
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>a</mi><annotation encoding="application/x-tex">a</annotation></semantics></math>
-is uninformative. The prior on
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>b</mi><annotation encoding="application/x-tex">b</annotation></semantics></math>
-suggests that we expect 50% borrowing, with associated 95% credible
-interval
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mn>0.21</mn><mo>,</mo><mn>0.79</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(0.21, 0.79)</annotation></semantics></math>.</p>
+<p>We provided hyperpriors <span class="math inline">a \sim Beta(1/3,
+1/3)</span> and <span class="math inline">b \sim Beta(5, 5)</span>. The
+prior on <span class="math inline">a</span> is uninformative. The prior
+on <span class="math inline">b</span> suggests that we expect 50%
+borrowing, with associated 95% credible interval <span class="math inline">(0.21, 0.79)</span>.</p>
 <p>The returned object contains the Stan model fit:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">fit</span><span class="op">)</span></span>
@@ -177,14 +169,12 @@ interval
 <span><span class="co">#&gt; ess              1</span></span>
 <span><span class="co">#&gt; lp__             1</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Samples were drawn using NUTS(diag_e) at Fri Oct 16 08:48:08 2026.</span></span>
+<span><span class="co">#&gt; Samples were drawn using NUTS(diag_e) at Fri Oct 16 09:24:13 2026.</span></span>
 <span><span class="co">#&gt; For each parameter, n_eff is a crude measure of effective sample size,</span></span>
 <span><span class="co">#&gt; and Rhat is the potential scale reduction factor on split chains (at </span></span>
 <span><span class="co">#&gt; convergence, Rhat=1).</span></span></code></pre></div>
-<p>The
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>π</mi><mi>j</mi></msub><annotation encoding="application/x-tex">\pi_j</annotation></semantics></math>
-terms are reflected by the <code>pi_h</code> variables in the Stan
-model. From the forest plot:</p>
+<p>The <span class="math inline">\pi_j</span> terms are reflected by the
+<code>pi_h</code> variables in the Stan model. From the forest plot:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/forest_plot.html">forest_plot</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
 <p><img src="article-1-priors_files/figure-html/unnamed-chunk-6-1.png" class="r-plt" alt="" width="700"></p>

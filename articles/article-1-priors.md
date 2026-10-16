@@ -7,8 +7,8 @@ library(bssd)
 
 ## MAP method for generating a prior from historical studies with patient-level data
 
-Let us create some patient-level historical study data for $`N=100`$
-placebo patients collected from 5 studies.
+Let us create some patient-level historical study data for N=100 placebo
+patients collected from 5 studies.
 
 ``` r
 
@@ -48,8 +48,8 @@ hist_df %>%
 
 We see that in this example, all studies are fairly small but later
 studies are longer and therefore see more adverse events. Nevertheless,
-the hazard in all studies is 0.15 so that the true $`\pi_j`$ in each
-study is:
+the hazard in all studies is 0.15 so that the true \pi_j in each study
+is:
 
 ``` r
 
@@ -71,10 +71,9 @@ The `refresh = 0` parameter suppresses sampling messages from Stan. Note
 that the seed setting for R and Stan are independent, so setting seed
 for both R and Stan are necessary for reproducible results.
 
-We provided hyperpriors $`a \sim Beta(1/3, 1/3)`$ and
-$`b \sim Beta(5, 5)`$. The prior on $`a`$ is uninformative. The prior on
-$`b`$ suggests that we expect 50% borrowing, with associated 95%
-credible interval $`(0.21, 0.79)`$.
+We provided hyperpriors a \sim Beta(1/3, 1/3) and b \sim Beta(5, 5). The
+prior on a is uninformative. The prior on b suggests that we expect 50%
+borrowing, with associated 95% credible interval (0.21, 0.79).
 
 The returned object contains the Stan model fit:
 
@@ -114,14 +113,14 @@ print(x$fit)
 #> ess              1
 #> lp__             1
 #> 
-#> Samples were drawn using NUTS(diag_e) at Fri Oct 16 08:48:08 2026.
+#> Samples were drawn using NUTS(diag_e) at Fri Oct 16 09:24:13 2026.
 #> For each parameter, n_eff is a crude measure of effective sample size,
 #> and Rhat is the potential scale reduction factor on split chains (at 
 #> convergence, Rhat=1).
 ```
 
-The $`\pi_j`$ terms are reflected by the `pi_h` variables in the Stan
-model. From the forest plot:
+The \pi_j terms are reflected by the `pi_h` variables in the Stan model.
+From the forest plot:
 
 ``` r
 

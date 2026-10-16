@@ -67,8 +67,8 @@ pi1_alpha <- c(6.673, 4.614)
 pi1_beta <- c(27.393, 25.853)
 ```
 
-We will also use a $`Beta(1/3, 1/3)`$ prior on the active arm,
-reflecting our relative ignorance:
+We will also use a Beta(1/3, 1/3) prior on the active arm, reflecting
+our relative ignorance:
 
 ``` r
 
