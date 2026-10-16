@@ -7,11 +7,21 @@ Fits models for safety signal detection using Stan
 Stan Development Team (2020). RStan: the R interface to Stan. R package
 version 2.21.2. https://mc-stan.org
 
+## See also
+
+Useful links:
+
+- <https://openpharma.github.io/bssd/>
+
+- Report bugs at <https://github.com/openpharma/bssd/issues/>
+
 ## Author
 
 **Maintainer**: Nils Penard <nils.penard@ucb.com>
 
 Authors:
+
+- Nils Penard <nils.penard@ucb.com>
 
 - Kristian Brock <kristian.brock@gmail.com>
   ([ORCID](https://orcid.org/0000-0002-3921-0166))
@@ -25,3 +35,7 @@ Authors:
 - Jesus Minguez <jesus.minguez@ucb.com>
 
 - Iolo Williams <iolo.williams@ucb.com>
+
+Other contributors:
+
+- UCB S.A., Belgium \[copyright holder, funder\]
