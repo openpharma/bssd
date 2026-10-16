@@ -37,7 +37,7 @@ Authors@R:
 Description: Fits Bayesian models to analyze safety signals in clinical trial 
     datasets, including meta-analytic methods. 
     For more details see 
-    Kristian Brock, Chen Chen, Shuyen Ho, Greg Fuller, Jared Woolfolk, Cindy McShea and Nils Penard (2023) doi:10.1002/pst.2278.
+    Kristian Brock, Chen Chen, Shuyen Ho, Greg Fuller, Jared Woolfolk, Cindy McShea and Nils Penard (2023) <doi:10.1002/pst.2278>.
 License: Apache License (>= 2)
 URL: https://openpharma.github.io/bssd/
 BugReports: https://github.com/openpharma/bssd/issues/
