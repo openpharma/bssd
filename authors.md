@@ -25,12 +25,12 @@ Source:
 
 Brock K, Chen C, Fuller G, Grinberg M, Minguez J, Williams I, Penard N
 (2026). *bssd: Bayesian Safety Signal Detection with R*. R package
-version 0.5.0.9000, <https://openpharma.github.io/bssd/>.
+version 0.5.1, <https://openpharma.github.io/bssd/>.
 
     @Manual{,
       title = {bssd: Bayesian Safety Signal Detection with R},
       author = {Kristian Brock and Chen Chen and Greg Fuller and Marianna Grinberg and Jesus Minguez and Iolo Williams and Nils Penard},
       year = {2026},
-      note = {R package version 0.5.0.9000},
+      note = {R package version 0.5.1},
       url = {https://openpharma.github.io/bssd/},
     }
