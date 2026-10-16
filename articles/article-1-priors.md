@@ -114,7 +114,7 @@ print(x$fit)
 #> ess              1
 #> lp__             1
 #> 
-#> Samples were drawn using NUTS(diag_e) at Thu Oct 15 14:28:13 2026.
+#> Samples were drawn using NUTS(diag_e) at Fri Oct 16 08:31:55 2026.
 #> For each parameter, n_eff is a crude measure of effective sample size,
 #> and Rhat is the potential scale reduction factor on split chains (at 
 #> convergence, Rhat=1).
