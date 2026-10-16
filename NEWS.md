@@ -1,3 +1,3 @@
-# bssd 0.5.0.9000
+# bssd 0.5.1
 
 * Initial open-source release.

@@ -49,4 +49,4 @@ Brock K, Chen C, Ho S, Fuller G, Woolfolk J, McShea C, Penard N. A Bayesian Meth
 
 ## Acknowledgements
 
-The authors gratefully acknowledge Rosalind J. Walley, Phil Woodward, Arnab Sarkar, Daniel Meddings and Benjamin Duncan for their invaluable support, insights, and contributions to the development of the broader methodological landscape underpinning bssd. The authors also extend their sincere thanks to Cindy McShea for her instrumental support and encouragements throughout the development of the bssd package.
+The authors gratefully acknowledge Rosalind J. Walley, Phil Woodward, Arnab Sarkar, Daniel Meddings and Benjamin Duncan for their invaluable support, insights, and contributions to the development of the broader methodological landscape underpinning bssd. The authors also extend their sincere thanks to Cindy McShea for her instrumental support and encouragements throughout the development of the bssd package. The authors further thanks Maciej Nasinski for his valuable guidance and support throughout the process of open-sourcing the bssd package.
