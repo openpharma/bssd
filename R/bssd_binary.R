@@ -1,6 +1,6 @@
 #' Creator for class \code{bssd_binary}.
 #'
-#' @description The object in slot \code{fit} is an object of type
+#' @description The object in element \code{fit} is an object of type
 #' \code{stanfit} from the rstan package. It contains samples for variables
 #' \code{pi1} and \code{pi2}. These are the probabilities of at least one event
 #' in a single unit of time in arms one and two.
@@ -11,7 +11,9 @@
 #' positive, time covariate.
 #' @param fit instance of class \code{stanfit}.
 #'
-#' @return object of type \code{bssd_binary}.
+#' @return A list of class \code{bssd_binary} (also inheriting from
+#' \code{bssd}), containing the observed event indicators \code{y}, follow-up
+#' times \code{time}, and the fitted Stan model \code{fit}.
 #'
 #' @export
 #'
@@ -27,17 +29,26 @@ bssd_binary <- function(y, time, fit) {
   l
 }
 
-#' Summary statistics of the stan BSSD model.
+#' Summary statistics of a BSSD model.
 #'
-#' @param object stanfit object.
-#' @param alpha if not null, 1 - alpha confidence interval is calculated.
-#' @param ... extra parameters are passed to \code{\link{stan_bssd}}.
+#' @param object A \code{bssd_binary} object.
+#' @param alpha Complement of the interval mass; 0.05 gives a 95% interval.
+#' @param ... Unused.
+#'
+#' @return A tibble with three rows. The \code{variable} column identifies
+#' \code{pi1} and \code{pi2} (the unit-time event probabilities in arms 1 and
+#' 2) and \code{prob_higher} (the estimated probability that the arm 2 event
+#' probability exceeds that of arm 1). Columns \code{mean}, \code{median}, and
+#' \code{sd} summarize posterior draws for \code{pi1} and \code{pi2}, and
+#' circular-shift estimates for \code{prob_higher}. Columns \code{.lower} and
+#' \code{.upper} give the corresponding highest-density interval bounds, and
+#' \code{alpha} gives the complement of the interval mass.
 #'
 #' @importFrom stats sd
 #' @importFrom HDInterval hdi
 #' @importFrom dplyr bind_rows
 #' @importFrom tibble tibble
-#' @keywords internal         # hide from the manual index
+#' @keywords internal
 #' @export summary.bssd_binary
 #' @export
 summary.bssd_binary <- function(object, alpha = 0.05, ...) {
@@ -75,18 +86,24 @@ summary.bssd_binary <- function(object, alpha = 0.05, ...) {
 }
 
 
-#' Print estimated mean event rate in each arm, and the posterior probability
-#' that the true event rate is greater in the active arm.
+#' Print a BSSD model summary.
 #'
-#' @param x stanfit object.
-#' @param mcmc MCMC flag.
-#' @param alpha if not null, 1 - alpha confidence interval is calculated.
-#' @param ... extra parameters are passed to \code{\link{stan_bssd}}.
+#' @param x A \code{bssd_binary} object.
+#' @param mcmc If \code{TRUE}, also print the fitted Stan model.
+#' @param alpha Complement of the interval mass; 0.05 gives a 95% interval.
+#' @param ... Unused.
+#'
+#' @return Invisibly returns \code{NULL}. Called for the side effect of printing
+#' the mean unit-time event probabilities in the two arms and the estimated
+#' probability that the arm 2 event probability is higher, each with a
+#' highest-density interval. The comparison is estimated using circular shifts
+#' of the posterior draws. If \code{mcmc} is \code{TRUE}, the fitted Stan model
+#' is printed as well.
 #'
 #' @importFrom magrittr %>%
 #' @importFrom dplyr select summarise rename pull n
 #' @importFrom HDInterval hdi
-#' @keywords internal         # hide from the manual index
+#' @keywords internal
 #' @export print.bssd_binary
 #' @export
 print.bssd_binary <- function(x, mcmc = FALSE, alpha = 0.05, ...) {
@@ -121,14 +138,20 @@ print.bssd_binary <- function(x, mcmc = FALSE, alpha = 0.05, ...) {
   }
 }
 
-#' Store pi1 and pi2 values from the stan BSSD model in a dataframe.
+#' Extract posterior draws from a BSSD model.
 #'
-#' @param x stanfit object.
-#' @param row.names row names flag.
-#' @param optional optional flag.
-#' @param ... extra parameters are passed to \code{\link{stan_bssd}}.
+#' @param x A \code{bssd_binary} object.
+#' @param row.names Unused.
+#' @param optional Unused.
+#' @param ... The optional \code{pars} argument selects Stan parameters to
+#' extract; other arguments are unused.
 #'
-#' @keywords internal         # hide from the manual index
+#' @return A data frame with one row per retained MCMC draw, pooled across
+#' chains. By default, columns \code{pi1} and \code{pi2} contain the
+#' unit-time event probabilities in arms 1 and 2, respectively. Supplying
+#' \code{pars} selects different parameters from the fitted Stan model.
+#'
+#' @keywords internal
 #' @export as.data.frame.bssd_binary
 #' @export
 as.data.frame.bssd_binary <- function(x, row.names = NULL,
@@ -139,17 +162,21 @@ as.data.frame.bssd_binary <- function(x, row.names = NULL,
 }
 
 
-#' Plot stan BSSD model inferences.
+#' Plot posterior event probabilities from a BSSD model.
 #'
-#' @param x stanfit object.
-#' @param ... extra parameters are passed to \code{\link{stan_bssd}}.
+#' @param x A \code{bssd_binary} object.
+#' @param ... Unused.
+#'
+#' @return A \code{ggplot} object showing density curves for the posterior
+#' draws of the unit-time event probabilities in arms 1 and 2. Print the object
+#' to display the plot.
 #'
 #' @importFrom magrittr %>%
 #' @importFrom dplyr select mutate
 #' @importFrom tidyr pivot_longer
 #' @importFrom forcats fct_recode
 #' @importFrom ggplot2 ggplot aes geom_density labs
-#' @keywords internal         # hide from the manual index
+#' @keywords internal
 #' @export plot.bssd_binary
 #' @export
 plot.bssd_binary <- function(x, ...) {

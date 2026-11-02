@@ -2,22 +2,21 @@
 % Please edit documentation in R/bssd_binary.R
 \name{plot.bssd_binary}
 \alias{plot.bssd_binary}
-\title{Plot stan BSSD model inferences.}
+\title{Plot posterior event probabilities from a BSSD model.}
 \usage{
 \method{plot}{bssd_binary}(x, ...)
 }
 \arguments{
-\item{x}{stanfit object.}
+\item{x}{A \code{bssd_binary} object.}
 
-\item{...}{extra parameters are passed to \code{\link{stan_bssd}}.}
+\item{...}{Unused.}
+}
+\value{
+A \code{ggplot} object showing density curves for the posterior
+draws of the unit-time event probabilities in arms 1 and 2. Print the object
+to display the plot.
 }
 \description{
-Plot stan BSSD model inferences.
+Plot posterior event probabilities from a BSSD model.
 }
-\keyword{#}
-\keyword{from}
-\keyword{hide}
-\keyword{index}
 \keyword{internal}
-\keyword{manual}
-\keyword{the}

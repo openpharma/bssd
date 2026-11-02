@@ -12,7 +12,10 @@
 #' @param sample Object of type \code{bssd_binary_map}.
 #' @param ... extra parameters are passed to \code{\link[RBesT]{automixfit}}.
 #'
-#' @return object of type \code{\link[RBesT]{mix}}.
+#' @return A matrix-like \code{\link[RBesT]{mix}} object describing a beta
+#' mixture fitted to the predictive event-probability draws. Columns represent
+#' mixture components; rows \code{w}, \code{a}, and \code{b} contain their
+#' weights and beta shape parameters.
 #'
 #' @importFrom RBesT automixfit
 #'

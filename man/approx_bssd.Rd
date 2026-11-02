@@ -42,7 +42,8 @@ unit-time event probability in active (arm2).}
 'rbeta' function to add function result reproducibility.}
 }
 \value{
-numeric, Pr(active AE rate > placebo AE rate).
+A numeric estimate of the probability that the active-arm event
+probability exceeds the placebo-arm event probability.
 }
 \description{
 Note that this function is quite rudimentary and only suitable

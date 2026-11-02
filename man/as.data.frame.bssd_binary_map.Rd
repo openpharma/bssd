@@ -2,26 +2,31 @@
 % Please edit documentation in R/bssd_binary_map.R
 \name{as.data.frame.bssd_binary_map}
 \alias{as.data.frame.bssd_binary_map}
-\title{Store pi1 and pi2 values from the stan BSSD model in a dataframe.}
+\title{Extract posterior draws from a meta-analytic predictive BSSD model.}
 \usage{
 \method{as.data.frame}{bssd_binary_map}(x, row.names = NULL, optional = FALSE, ...)
 }
 \arguments{
-\item{x}{stanfit object.}
+\item{x}{A \code{bssd_binary_map} object.}
 
-\item{row.names}{row names flag.}
+\item{row.names}{Unused.}
 
-\item{optional}{optional flag.}
+\item{optional}{Unused.}
 
-\item{...}{extra parameters are passed to \code{\link{stan_bssd}}.}
+\item{...}{The optional \code{pars} argument selects Stan parameters to
+extract; other arguments are unused.}
+}
+\value{
+A data frame with one row per retained MCMC draw, pooled across
+chains. By default, columns \code{pi_h[1]}, \code{pi_h[2]}, and so on
+contain unit-time event probabilities for the historical trials. Other
+columns contain \code{a} (the predictive mean), \code{b} (the fraction of
+historical data borrowed), \code{ess} (the effective sample size),
+\code{avg} (the predictive mean), and \code{pi_star} (the unit-time event
+probability in a new exchangeable trial). Supplying \code{pars} selects
+different parameters from the fitted Stan model.
 }
 \description{
-Store pi1 and pi2 values from the stan BSSD model in a dataframe.
+Extract posterior draws from a meta-analytic predictive BSSD model.
 }
-\keyword{#}
-\keyword{from}
-\keyword{hide}
-\keyword{index}
 \keyword{internal}
-\keyword{manual}
-\keyword{the}

@@ -25,7 +25,6 @@ Useful links:
 
 Authors:
 \itemize{
-  \item Nils Penard \email{nils.penard@ucb.com}
   \item Kristian Brock \email{kristian.brock@gmail.com} (\href{https://orcid.org/0000-0002-3921-0166}{ORCID})
   \item Chen Chen \email{chen.chen@ucb.com}
   \item Greg Fuller \email{greg.fuller@ucb.com}

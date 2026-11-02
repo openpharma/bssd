@@ -2,24 +2,28 @@
 % Please edit documentation in R/bssd_binary.R
 \name{summary.bssd_binary}
 \alias{summary.bssd_binary}
-\title{Summary statistics of the stan BSSD model.}
+\title{Summary statistics of a BSSD model.}
 \usage{
 \method{summary}{bssd_binary}(object, alpha = 0.05, ...)
 }
 \arguments{
-\item{object}{stanfit object.}
+\item{object}{A \code{bssd_binary} object.}
 
-\item{alpha}{if not null, 1 - alpha confidence interval is calculated.}
+\item{alpha}{Complement of the interval mass; 0.05 gives a 95\% interval.}
 
-\item{...}{extra parameters are passed to \code{\link{stan_bssd}}.}
+\item{...}{Unused.}
+}
+\value{
+A tibble with three rows. The \code{variable} column identifies
+\code{pi1} and \code{pi2} (the unit-time event probabilities in arms 1 and
+2) and \code{prob_higher} (the estimated probability that the arm 2 event
+probability exceeds that of arm 1). Columns \code{mean}, \code{median}, and
+\code{sd} summarize posterior draws for \code{pi1} and \code{pi2}, and
+circular-shift estimates for \code{prob_higher}. Columns \code{.lower} and
+\code{.upper} give the corresponding highest-density interval bounds, and
+\code{alpha} gives the complement of the interval mass.
 }
 \description{
-Summary statistics of the stan BSSD model.
+Summary statistics of a BSSD model.
 }
-\keyword{#}
-\keyword{from}
-\keyword{hide}
-\keyword{index}
 \keyword{internal}
-\keyword{manual}
-\keyword{the}

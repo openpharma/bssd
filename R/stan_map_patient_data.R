@@ -52,7 +52,10 @@
 #' @param b_beta numeric, second shape param of beta prior on b. See Details.
 #' @param ... extra parameters are passed to \code{\link[rstan]{sampling}}.
 #'
-#' @return object of type \code{\link{bssd_binary_map}}.
+#' @return A \code{bssd_binary_map_pl} object, inheriting from
+#' \code{\link{bssd_binary_map}}, containing the fitted Stan model and
+#' posterior draws used to form a predictive prior for the unit-time event
+#' probability in a new exchangeable trial.
 #'
 #' @importFrom rstan sampling
 #' @importFrom stats rbeta

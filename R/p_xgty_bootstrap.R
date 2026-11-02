@@ -19,8 +19,10 @@
 #' @param offset We calculate Pr(x > y + offset). Default offset is 0.
 #' @param alpha if not null, 1 - alpha confidence interval is calculated.
 #'
-#' @return tibble with columns mean and sd, and also .lower and .upper, if alpha
-#' is not null, from the highest density posterior interval.
+#' @return A one-row tibble whose \code{mean}, \code{median}, and \code{sd}
+#' columns summarize the proportions of \code{x > y + offset} across circular
+#' shifts. If \code{alpha} is not \code{NULL}, \code{.lower} and \code{.upper}
+#' give the bounds of the highest-density interval for those proportions.
 #'
 #' @importFrom stats median qnorm sd
 #' @importFrom purrr map_dbl

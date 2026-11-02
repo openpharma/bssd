@@ -6,7 +6,9 @@
 #' @param alpha 0.05 to use 95% CIs, etc.
 #' @param ... ignored.
 #'
-#' @return ggplot plot.
+#' @return A \code{ggplot} object showing posterior mean unit-time event
+#' probabilities and equal-tailed intervals for each historical trial and the
+#' meta-analytic predictive distribution.
 #'
 #' @importFrom tidyr gather
 #' @importFrom dplyr mutate select bind_rows tibble group_by summarise

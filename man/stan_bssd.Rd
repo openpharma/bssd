@@ -57,7 +57,8 @@ distributions in mixture prior on unit-time event probability in active
 \item{...}{extra parameters are passed to \code{\link[rstan]{sampling}}.}
 }
 \value{
-object of type \code{\link{bssd_binary}}.
+A \code{\link{bssd_binary}} object containing the observations,
+follow-up times, and fitted Stan model for the two-arm safety analysis.
 }
 \description{
 If you know the treatment allocations, provide those as a vector

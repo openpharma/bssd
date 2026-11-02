@@ -11,7 +11,7 @@ stan_map_summary_data(y, n, time, a_alpha, a_beta, b_alpha, b_beta, ...)
 
 \item{n}{integer vector, number of patients in the trials.}
 
-\item{time, }{numeric vector, strictly positive, time at risk in the trials.}
+\item{time}{numeric vector, strictly positive, time at risk in the trials.}
 
 \item{a_alpha}{numeric, first shape param of beta prior on a. See Details.}
 
@@ -24,7 +24,10 @@ stan_map_summary_data(y, n, time, a_alpha, a_beta, b_alpha, b_beta, ...)
 \item{...}{extra parameters are passed to \code{\link[rstan]{sampling}}.}
 }
 \value{
-object of type \code{\link{bssd_binary_map}}.
+A \code{bssd_binary_map_sl} object, inheriting from
+\code{\link{bssd_binary_map}}, containing the fitted Stan model and
+posterior draws used to form a predictive prior for the unit-time event
+probability in a new exchangeable trial.
 }
 \description{
 Fit a Stan MAP prior generation model to summary-level data.

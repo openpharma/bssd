@@ -30,6 +30,7 @@ test_that("forest_plot input and output is as expected.", {
 
   # obtain forest plot of input data
   forest_plot <- forest_plot(x, alpha = alpha)
+  expect_s3_class(forest_plot, "ggplot")
   forest_plot
 
   # use layer_data to extract mean and quantile data from the plot

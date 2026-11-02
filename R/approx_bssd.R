@@ -21,7 +21,8 @@
 #' @param seed integer, used to initialize the random number generator for
 #' 'rbeta' function to add function result reproducibility.
 #'
-#' @return numeric, Pr(active AE rate > placebo AE rate).
+#' @return A numeric estimate of the probability that the active-arm event
+#' probability exceeds the placebo-arm event probability.
 #'
 #' @importFrom stats rbeta dbinom
 #'

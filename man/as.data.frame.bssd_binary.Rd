@@ -2,26 +2,27 @@
 % Please edit documentation in R/bssd_binary.R
 \name{as.data.frame.bssd_binary}
 \alias{as.data.frame.bssd_binary}
-\title{Store pi1 and pi2 values from the stan BSSD model in a dataframe.}
+\title{Extract posterior draws from a BSSD model.}
 \usage{
 \method{as.data.frame}{bssd_binary}(x, row.names = NULL, optional = FALSE, ...)
 }
 \arguments{
-\item{x}{stanfit object.}
+\item{x}{A \code{bssd_binary} object.}
 
-\item{row.names}{row names flag.}
+\item{row.names}{Unused.}
 
-\item{optional}{optional flag.}
+\item{optional}{Unused.}
 
-\item{...}{extra parameters are passed to \code{\link{stan_bssd}}.}
+\item{...}{The optional \code{pars} argument selects Stan parameters to
+extract; other arguments are unused.}
+}
+\value{
+A data frame with one row per retained MCMC draw, pooled across
+chains. By default, columns \code{pi1} and \code{pi2} contain the
+unit-time event probabilities in arms 1 and 2, respectively. Supplying
+\code{pars} selects different parameters from the fitted Stan model.
 }
 \description{
-Store pi1 and pi2 values from the stan BSSD model in a dataframe.
+Extract posterior draws from a BSSD model.
 }
-\keyword{#}
-\keyword{from}
-\keyword{hide}
-\keyword{index}
 \keyword{internal}
-\keyword{manual}
-\keyword{the}

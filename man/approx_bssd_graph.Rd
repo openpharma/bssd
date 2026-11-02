@@ -42,7 +42,8 @@ changed to a smaller number to fasten the computation time, but the
 estimation will be less accurate.}
 }
 \value{
-list, ggplot2 graph.
+A \code{ggplot} object showing estimated safety signal levels for
+combinations of sample size and observed adverse event counts.
 }
 \description{
 This function creates a graph that represents all possible
@@ -53,9 +54,8 @@ The y-axis represents the number of participants with one AE. Risk levels,
 i.e., Pr(active AE rate > placebo AE rate), are expressed via color coding:
 green, yellow, and red representing risk levels that would warrant no action,
 a warning, and an alert, respectively. These three levels are delimited by
-two thresholds that are set to 80\% and 90\% by default. This function
-assumes that all the enrolled patients are completers (no dropout). The
-threshold levels can be changed.
+thresholds of 80\% and 90\%. This function assumes that all the enrolled
+patients are completers (no dropout).
 }
 \examples{
 # Note: Set seed for reproducible graph.

@@ -231,6 +231,8 @@ test_that("fit1$fit as data frame", {
 
   expect_true(is.data.frame(as.data.frame.bssd_binary(fit1,
                                                       pars = c("pi1", "pi2"))))
+  expect_named(as.data.frame(fit1), c("pi1", "pi2"))
+  expect_named(as.data.frame(fit1, pars = "pi2"), "pi2")
 })
 
 # Test plot object -------------------------------------------------------------

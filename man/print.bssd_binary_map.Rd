@@ -2,28 +2,27 @@
 % Please edit documentation in R/bssd_binary_map.R
 \name{print.bssd_binary_map}
 \alias{print.bssd_binary_map}
-\title{Print estimated mean event rate in each arm, and the posterior probability
-that the true event rate is greater in the active arm.}
+\title{Print a meta-analytic predictive BSSD model summary.}
 \usage{
 \method{print}{bssd_binary_map}(x, mcmc = FALSE, alpha = 0.05, ...)
 }
 \arguments{
-\item{x}{stanfit object.}
+\item{x}{A \code{bssd_binary_map} object.}
 
-\item{mcmc}{MCMC flag.}
+\item{mcmc}{If \code{TRUE}, also print the fitted Stan model.}
 
-\item{alpha}{if not null, 1 - alpha confidence interval is calculated.}
+\item{alpha}{Complement of the interval mass; 0.05 gives a 95\% interval.}
 
-\item{...}{extra parameters are passed to \code{\link{stan_bssd}}.}
+\item{...}{Unused.}
+}
+\value{
+Invisibly returns \code{NULL}. Called for the side effect of printing
+the posterior means and highest-density intervals for the mean of the
+predictive distribution and the unit-time event probability in a new
+exchangeable trial. If \code{mcmc} is \code{TRUE}, the fitted Stan model is
+printed as well.
 }
 \description{
-Print estimated mean event rate in each arm, and the posterior probability
-that the true event rate is greater in the active arm.
+Print a meta-analytic predictive BSSD model summary.
 }
-\keyword{#}
-\keyword{from}
-\keyword{hide}
-\keyword{index}
 \keyword{internal}
-\keyword{manual}
-\keyword{the}

@@ -9,9 +9,8 @@
 #' i.e., Pr(active AE rate > placebo AE rate), are expressed via color coding:
 #' green, yellow, and red representing risk levels that would warrant no action,
 #' a warning, and an alert, respectively. These three levels are delimited by
-#' two thresholds that are set to 80% and 90% by default. This function
-#' assumes that all the enrolled patients are completers (no dropout). The
-#' threshold levels can be changed.
+#' thresholds of 80% and 90%. This function assumes that all the enrolled
+#' patients are completers (no dropout).
 #'
 #' @param time numeric, total time at risk (units = study duration). It
 #' can also be construed as the actual number of participants in the ongoing
@@ -32,7 +31,8 @@
 #'   changed to a smaller number to fasten the computation time, but the
 #'   estimation will be less accurate.
 #'
-#' @return list, ggplot2 graph.
+#' @return A \code{ggplot} object showing estimated safety signal levels for
+#' combinations of sample size and observed adverse event counts.
 #'
 #' @importFrom dplyr filter case_when
 #' @importFrom ggplot2 geom_point geom_abline scale_color_manual

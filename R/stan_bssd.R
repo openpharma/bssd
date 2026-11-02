@@ -36,7 +36,8 @@
 #' (arm2).
 #' @param ... extra parameters are passed to \code{\link[rstan]{sampling}}.
 #'
-#' @return object of type \code{\link{bssd_binary}}.
+#' @return A \code{\link{bssd_binary}} object containing the observations,
+#' follow-up times, and fitted Stan model for the two-arm safety analysis.
 #'
 #' @importFrom rstan sampling
 #'
