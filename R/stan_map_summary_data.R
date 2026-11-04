@@ -51,10 +51,15 @@
 #' @inheritParams stan_map_patient_data
 #' @param y integer vector, number of events in the trials.
 #' @param n integer vector, number of patients in the trials.
-#' @param time, numeric vector, strictly positive, time at risk in the trials.
+#' @param time numeric vector, strictly positive, time at risk in the trials.
 #' @param ... extra parameters are passed to \code{\link[rstan]{sampling}}.
 #'
-#' @return object of type \code{\link{bssd_binary_map}}.
+#' @return An object of class \code{\link{bssd_binary_map}} containing the
+#' fitted Stan meta-analytic-predictive model. The object contains posterior
+#' draws for the mean unit-time event probability (\code{mean}), the effective
+#' sample size (\code{ess}), and the predictive unit-time event probability
+#' for a new exchangeable trial (\code{pi_star}). The \code{fit} component
+#' contains the underlying \code{stanfit} object.
 #'
 #' @importFrom rstan sampling
 #' @importFrom stats rbeta
@@ -133,7 +138,5 @@ stan_map_summary_data <- function(y, n, time,
   fit <- sampling(object = stanmodels$map_prior_summary_data,
                   data = dat,
                   ...)
-  l <- bssd_binary_map(fit)
-  class(l) <- c("bssd_binary_map_sl", class(l))
-  l
+  bssd_binary_map(fit)
 }

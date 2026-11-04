@@ -2,26 +2,30 @@
 % Please edit documentation in R/bssd_binary_map.R
 \name{as.data.frame.bssd_binary_map}
 \alias{as.data.frame.bssd_binary_map}
-\title{Store pi1 and pi2 values from the stan BSSD model in a dataframe.}
+\title{Extract posterior draws from a meta-analytic predictive BSSD model.}
 \usage{
 \method{as.data.frame}{bssd_binary_map}(x, row.names = NULL, optional = FALSE, ...)
 }
 \arguments{
-\item{x}{stanfit object.}
+\item{x}{A \code{bssd_binary_map} object.}
 
-\item{row.names}{row names flag.}
+\item{row.names}{Unused.}
 
-\item{optional}{optional flag.}
+\item{optional}{Unused.}
 
-\item{...}{extra parameters are passed to \code{\link{stan_bssd}}.}
+\item{...}{The optional \code{pars} argument selects Stan parameters to
+extract; other arguments are unused.}
+}
+\value{
+A data frame containing posterior draws from the Stan
+meta-analytic-predictive model. By default, it contains the historical
+trial event probabilities (\code{pi_h}), model parameters \code{a} and
+\code{b}, the effective sample size (\code{ess}), mean event probability
+(\code{avg}), and the predictive event probability for a new exchangeable
+trial (\code{pi_star}). Alternative Stan parameters can be selected using
+\code{pars} in \code{...}.
 }
 \description{
-Store pi1 and pi2 values from the stan BSSD model in a dataframe.
+Extract posterior draws from a meta-analytic predictive BSSD model.
 }
-\keyword{#}
-\keyword{from}
-\keyword{hide}
-\keyword{index}
 \keyword{internal}
-\keyword{manual}
-\keyword{the}

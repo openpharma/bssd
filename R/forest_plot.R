@@ -6,7 +6,9 @@
 #' @param alpha 0.05 to use 95% CIs, etc.
 #' @param ... ignored.
 #'
-#' @return ggplot plot.
+#' @return A \code{ggplot} object showing posterior mean unit-time event
+#' probabilities and equal-tailed intervals for each historical trial and the
+#' meta-analytic predictive distribution.
 #'
 #' @importFrom tidyr gather
 #' @importFrom dplyr mutate select bind_rows tibble group_by summarise
@@ -38,9 +40,7 @@
 #' forest_plot(x, alpha = 0.1)
 forest_plot <- function(x, alpha = 0.05, ...) {
 
-  if (!(any(class(x) %in% c("bssd_binary_map_sl",
-                            "bssd_binary_map_pl",
-                            "bssd_binary_map",
+  if (!(any(class(x) %in% c("bssd_binary_map",
                             "bssd_map")))) {
     stop("input must be of type bssd_binary_map")
   }

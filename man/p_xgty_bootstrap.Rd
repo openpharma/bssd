@@ -16,8 +16,10 @@ p_xgty_bootstrap(x, y, offset = 0, alpha = 0.05)
 \item{alpha}{if not null, 1 - alpha confidence interval is calculated.}
 }
 \value{
-tibble with columns mean and sd, and also .lower and .upper, if alpha
-is not null, from the highest density posterior interval.
+A one-row tibble whose \code{mean}, \code{median}, and \code{sd}
+columns summarize the proportions of \code{x > y + offset} across circular
+shifts. If \code{alpha} is not \code{NULL}, \code{.lower} and \code{.upper}
+give the bounds of the highest-density interval for those proportions.
 }
 \description{
 To estimate the confidence intervals for the posterior

@@ -2,24 +2,28 @@
 % Please edit documentation in R/bssd_binary_map.R
 \name{summary.bssd_binary_map}
 \alias{summary.bssd_binary_map}
-\title{Summary statistics of the stan BSSD model.}
+\title{Summary statistics of a meta-analytic predictive BSSD model.}
 \usage{
 \method{summary}{bssd_binary_map}(object, alpha = 0.05, ...)
 }
 \arguments{
-\item{object}{stanfit object.}
+\item{object}{A \code{bssd_binary_map} object.}
 
-\item{alpha}{if not null, 1 - alpha confidence interval is calculated.}
+\item{alpha}{Complement of the interval mass; 0.05 gives a 95\% interval.}
 
-\item{...}{extra parameters are passed to \code{\link{stan_bssd}}.}
+\item{...}{Unused.}
+}
+\value{
+A tibble with two rows of posterior summary statistics. The
+\code{variable} column identifies the mean event probability (\code{mean})
+and the meta-analytic-predictive event probability for a new exchangeable
+trial (\code{pi_star}). The \code{mean}, \code{median}, and \code{sd}
+columns summarize the corresponding posterior draws. The \code{.lower} and
+\code{.upper} columns give the lower and upper bounds of the highest
+posterior density interval, and \code{alpha} gives the complement of the
+interval mass.
 }
 \description{
-Summary statistics of the stan BSSD model.
+Summary statistics of a meta-analytic predictive BSSD model.
 }
-\keyword{#}
-\keyword{from}
-\keyword{hide}
-\keyword{index}
 \keyword{internal}
-\keyword{manual}
-\keyword{the}

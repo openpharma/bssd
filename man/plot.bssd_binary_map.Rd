@@ -2,22 +2,21 @@
 % Please edit documentation in R/bssd_binary_map.R
 \name{plot.bssd_binary_map}
 \alias{plot.bssd_binary_map}
-\title{Plot stan BSSD model inferences.}
+\title{Plot meta-analytic predictive event probabilities.}
 \usage{
 \method{plot}{bssd_binary_map}(x, ...)
 }
 \arguments{
-\item{x}{stanfit object.}
+\item{x}{A \code{bssd_binary_map} object.}
 
-\item{...}{extra parameters are passed to \code{\link{stan_bssd}}.}
+\item{...}{Unused.}
+}
+\value{
+A \code{ggplot} object showing the posterior density distributions
+of the mean event probability (\code{avg}) and the meta-analytic-predictive
+event probability for a new exchangeable trial (\code{pi_star}).
 }
 \description{
-Plot stan BSSD model inferences.
+Plot meta-analytic predictive event probabilities.
 }
-\keyword{#}
-\keyword{from}
-\keyword{hide}
-\keyword{index}
 \keyword{internal}
-\keyword{manual}
-\keyword{the}

@@ -19,7 +19,10 @@ sample size or effective sample size, see Details for more information).}
 \item{as_data_frame}{logical, TRUE to get results in a data-frame.}
 }
 \value{
-a data-frame if \code{as_data_frame = TRUE}; else a numeric vector.
+If \code{as_data_frame = FALSE}, a numeric vector of standardized
+event counts. Otherwise, a tibble with the input columns \code{y}, \code{n},
+\code{time}, and \code{time_std}, plus \code{y_std} for the standardized
+event counts.
 }
 \description{
 Get standardized adverse event counts.

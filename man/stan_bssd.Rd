@@ -57,7 +57,11 @@ distributions in mixture prior on unit-time event probability in active
 \item{...}{extra parameters are passed to \code{\link[rstan]{sampling}}.}
 }
 \value{
-object of type \code{\link{bssd_binary}}.
+An object of class \code{\link{bssd_binary}} containing the input
+event indicators (\code{y}), follow-up times (\code{time}), and the fitted
+Stan model in \code{fit}. The Stan model contains posterior draws for
+\code{pi1} and \code{pi2}, representing the probabilities of at least one
+event in one unit of time in arms 1 and 2, respectively.
 }
 \description{
 If you know the treatment allocations, provide those as a vector
