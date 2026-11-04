@@ -42,12 +42,14 @@ bssd_binary_map <- function(fit) {
 #' @param alpha Complement of the interval mass; 0.05 gives a 95% interval.
 #' @param ... Unused.
 #'
-#' @return A tibble with two rows, identified by the \code{variable} column:
-#' \code{mean} summarizes draws of the mean of the predictive distribution, and
-#' \code{pi_star} summarizes draws of the unit-time event probability in a new
-#' exchangeable trial. Columns \code{mean}, \code{median}, and \code{sd} give
-#' posterior summaries; \code{.lower} and \code{.upper} give highest-density
-#' interval bounds; and \code{alpha} gives the complement of the interval mass.
+#' @return A tibble with two rows of posterior summary statistics. The
+#' \code{variable} column identifies the mean event probability (\code{mean})
+#' and the meta-analytic-predictive event probability for a new exchangeable
+#' trial (\code{pi_star}). The \code{mean}, \code{median}, and \code{sd}
+#' columns summarize the corresponding posterior draws. The \code{.lower} and
+#' \code{.upper} columns give the lower and upper bounds of the highest
+#' posterior density interval, and \code{alpha} gives the complement of the
+#' interval mass.
 #'
 #' @importFrom stats sd
 #' @importFrom HDInterval hdi
@@ -81,18 +83,18 @@ summary.bssd_binary_map <- function(object, alpha = 0.05, ...) {
 }
 
 
-#' Print a meta-analytic predictive BSSD model summary.
+#' Print posterior summaries from the meta-analytic-predictive BSSD model.
 #'
 #' @param x A \code{bssd_binary_map} object.
 #' @param mcmc If \code{TRUE}, also print the fitted Stan model.
 #' @param alpha Complement of the interval mass; 0.05 gives a 95% interval.
 #' @param ... Unused.
 #'
-#' @return Invisibly returns \code{NULL}. Called for the side effect of printing
-#' the posterior means and highest-density intervals for the mean of the
-#' predictive distribution and the unit-time event probability in a new
-#' exchangeable trial. If \code{mcmc} is \code{TRUE}, the fitted Stan model is
-#' printed as well.
+#' @return No return value, called for side effects. The method prints the
+#' posterior mean event probability and the meta-analytic-predictive event
+#' probability for a new exchangeable trial, together with their highest
+#' posterior density intervals. If \code{mcmc = TRUE}, the underlying Stan fit
+#' is also printed.
 #'
 #' @importFrom magrittr %>%
 #' @importFrom HDInterval hdi
@@ -132,14 +134,13 @@ print.bssd_binary_map <- function(x, mcmc = FALSE, alpha = 0.05, ...) {
 #' @param ... The optional \code{pars} argument selects Stan parameters to
 #' extract; other arguments are unused.
 #'
-#' @return A data frame with one row per retained MCMC draw, pooled across
-#' chains. By default, columns \code{pi_h[1]}, \code{pi_h[2]}, and so on
-#' contain unit-time event probabilities for the historical trials. Other
-#' columns contain \code{a} (the predictive mean), \code{b} (the fraction of
-#' historical data borrowed), \code{ess} (the effective sample size),
-#' \code{avg} (the predictive mean), and \code{pi_star} (the unit-time event
-#' probability in a new exchangeable trial). Supplying \code{pars} selects
-#' different parameters from the fitted Stan model.
+#' @return A data frame containing posterior draws from the Stan
+#' meta-analytic-predictive model. By default, it contains the historical
+#' trial event probabilities (\code{pi_h}), model parameters \code{a} and
+#' \code{b}, the effective sample size (\code{ess}), mean event probability
+#' (\code{avg}), and the predictive event probability for a new exchangeable
+#' trial (\code{pi_star}). Alternative Stan parameters can be selected using
+#' \code{pars} in \code{...}.
 #'
 #' @keywords internal
 #' @export as.data.frame.bssd_binary_map
@@ -157,10 +158,9 @@ as.data.frame.bssd_binary_map <- function(x, row.names = NULL,
 #' @param x A \code{bssd_binary_map} object.
 #' @param ... Unused.
 #'
-#' @return A \code{ggplot} object showing density curves for posterior draws
-#' of \code{avg}, the mean of the predictive distribution, and \code{pi_star},
-#' the unit-time event probability in a new exchangeable trial. Print the
-#' object to display the plot.
+#' @return A \code{ggplot} object showing the posterior density distributions
+#' of the mean event probability (\code{avg}) and the meta-analytic-predictive
+#' event probability for a new exchangeable trial (\code{pi_star}).
 #'
 #' @importFrom magrittr %>%
 #' @importFrom dplyr select

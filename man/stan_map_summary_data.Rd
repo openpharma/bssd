@@ -24,10 +24,12 @@ stan_map_summary_data(y, n, time, a_alpha, a_beta, b_alpha, b_beta, ...)
 \item{...}{extra parameters are passed to \code{\link[rstan]{sampling}}.}
 }
 \value{
-A \code{bssd_binary_map_sl} object, inheriting from
-\code{\link{bssd_binary_map}}, containing the fitted Stan model and
-posterior draws used to form a predictive prior for the unit-time event
-probability in a new exchangeable trial.
+An object of class \code{\link{bssd_binary_map}} containing the
+fitted Stan meta-analytic-predictive model. The object contains posterior
+draws for the mean unit-time event probability (\code{mean}), the effective
+sample size (\code{ess}), and the predictive unit-time event probability
+for a new exchangeable trial (\code{pi_star}). The \code{fit} component
+contains the underlying \code{stanfit} object.
 }
 \description{
 Fit a Stan MAP prior generation model to summary-level data.

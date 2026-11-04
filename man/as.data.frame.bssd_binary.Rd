@@ -17,10 +17,11 @@
 extract; other arguments are unused.}
 }
 \value{
-A data frame with one row per retained MCMC draw, pooled across
-chains. By default, columns \code{pi1} and \code{pi2} contain the
-unit-time event probabilities in arms 1 and 2, respectively. Supplying
-\code{pars} selects different parameters from the fitted Stan model.
+A data frame containing posterior draws from the Stan model.
+By default, the data frame contains \code{pi1} and \code{pi2}, representing
+the probabilities of at least one event in a single unit of time in arms 1
+and 2, respectively. Alternative Stan parameters can be selected using
+\code{pars} in \code{...}.
 }
 \description{
 Extract posterior draws from a BSSD model.

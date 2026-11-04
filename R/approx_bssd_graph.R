@@ -31,8 +31,11 @@
 #'   changed to a smaller number to fasten the computation time, but the
 #'   estimation will be less accurate.
 #'
-#' @return A \code{ggplot} object showing estimated safety signal levels for
-#' combinations of sample size and observed adverse event counts.
+#' @return A \code{ggplot} object showing the estimated probability that the
+#' adverse-event rate in the active arm is greater than that in the placebo
+#' arm for each possible number of observed participants with an adverse
+#' event, given the specified total time at risk. Probability levels are
+#' represented by color coding in the plot.
 #'
 #' @importFrom dplyr filter case_when
 #' @importFrom ggplot2 geom_point geom_abline scale_color_manual

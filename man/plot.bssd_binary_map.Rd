@@ -12,10 +12,9 @@
 \item{...}{Unused.}
 }
 \value{
-A \code{ggplot} object showing density curves for posterior draws
-of \code{avg}, the mean of the predictive distribution, and \code{pi_star},
-the unit-time event probability in a new exchangeable trial. Print the
-object to display the plot.
+A \code{ggplot} object showing the posterior density distributions
+of the mean event probability (\code{avg}) and the meta-analytic-predictive
+event probability for a new exchangeable trial (\code{pi_star}).
 }
 \description{
 Plot meta-analytic predictive event probabilities.

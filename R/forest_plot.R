@@ -40,9 +40,7 @@
 #' forest_plot(x, alpha = 0.1)
 forest_plot <- function(x, alpha = 0.05, ...) {
 
-  if (!(any(class(x) %in% c("bssd_binary_map_sl",
-                            "bssd_binary_map_pl",
-                            "bssd_binary_map",
+  if (!(any(class(x) %in% c("bssd_binary_map",
                             "bssd_map")))) {
     stop("input must be of type bssd_binary_map")
   }

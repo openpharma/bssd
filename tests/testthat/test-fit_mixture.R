@@ -47,8 +47,8 @@ test_that("fit_mixture input and output is as expected.", {
     sum(w * mu_k)
   }
 
-  # expect input is of class 'bssd_binary_map_pl', 'bssd_binary_map', 'bssd_map'
-  expect_s3_class(x_1, c("bssd_binary_map_sl", "bssd_binary_map", "bssd_map"))
+  # expect input is of class 'bssd_binary_map', 'bssd_map'
+  expect_s3_class(x_1, c("bssd_binary_map", "bssd_map"), exact = TRUE)
 
   # expect fit object is of class 'stanfit'
   expect_s4_class(x_1$fit, "stanfit")

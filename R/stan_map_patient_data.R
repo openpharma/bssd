@@ -52,10 +52,12 @@
 #' @param b_beta numeric, second shape param of beta prior on b. See Details.
 #' @param ... extra parameters are passed to \code{\link[rstan]{sampling}}.
 #'
-#' @return A \code{bssd_binary_map_pl} object, inheriting from
-#' \code{\link{bssd_binary_map}}, containing the fitted Stan model and
-#' posterior draws used to form a predictive prior for the unit-time event
-#' probability in a new exchangeable trial.
+#' @return An object of class \code{\link{bssd_binary_map}} containing the
+#' fitted Stan meta-analytic-predictive model. The object contains posterior
+#' draws for the mean unit-time event probability (\code{mean}), the effective
+#' sample size (\code{ess}), and the predictive unit-time event probability
+#' for a new exchangeable trial (\code{pi_star}). The \code{fit} component
+#' contains the underlying \code{stanfit} object.
 #'
 #' @importFrom rstan sampling
 #' @importFrom stats rbeta
@@ -138,7 +140,5 @@ stan_map_patient_data <- function(y, trial, time,
   fit <- sampling(object = stanmodels$map_prior_patient_data,
                   data = dat,
                   ...)
-  l <- bssd_binary_map(fit)
-  class(l) <- c("bssd_binary_map_pl", class(l))
-  l
+  bssd_binary_map(fit)
 }

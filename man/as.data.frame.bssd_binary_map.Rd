@@ -17,14 +17,13 @@
 extract; other arguments are unused.}
 }
 \value{
-A data frame with one row per retained MCMC draw, pooled across
-chains. By default, columns \code{pi_h[1]}, \code{pi_h[2]}, and so on
-contain unit-time event probabilities for the historical trials. Other
-columns contain \code{a} (the predictive mean), \code{b} (the fraction of
-historical data borrowed), \code{ess} (the effective sample size),
-\code{avg} (the predictive mean), and \code{pi_star} (the unit-time event
-probability in a new exchangeable trial). Supplying \code{pars} selects
-different parameters from the fitted Stan model.
+A data frame containing posterior draws from the Stan
+meta-analytic-predictive model. By default, it contains the historical
+trial event probabilities (\code{pi_h}), model parameters \code{a} and
+\code{b}, the effective sample size (\code{ess}), mean event probability
+(\code{avg}), and the predictive event probability for a new exchangeable
+trial (\code{pi_star}). Alternative Stan parameters can be selected using
+\code{pars} in \code{...}.
 }
 \description{
 Extract posterior draws from a meta-analytic predictive BSSD model.

@@ -16,12 +16,11 @@
 \item{...}{Unused.}
 }
 \value{
-Invisibly returns \code{NULL}. Called for the side effect of printing
-the mean unit-time event probabilities in the two arms and the estimated
-probability that the arm 2 event probability is higher, each with a
-highest-density interval. The comparison is estimated using circular shifts
-of the posterior draws. If \code{mcmc} is \code{TRUE}, the fitted Stan model
-is printed as well.
+No return value, called for side effects. The method prints the
+posterior mean event probabilities in both arms and the posterior
+probability that the event rate in arm 2 is greater than that in arm 1,
+together with their highest posterior density intervals. If
+\code{mcmc = TRUE}, the underlying Stan fit is also printed.
 }
 \description{
 Print a BSSD model summary.

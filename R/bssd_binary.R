@@ -35,14 +35,14 @@ bssd_binary <- function(y, time, fit) {
 #' @param alpha Complement of the interval mass; 0.05 gives a 95% interval.
 #' @param ... Unused.
 #'
-#' @return A tibble with three rows. The \code{variable} column identifies
-#' \code{pi1} and \code{pi2} (the unit-time event probabilities in arms 1 and
-#' 2) and \code{prob_higher} (the estimated probability that the arm 2 event
-#' probability exceeds that of arm 1). Columns \code{mean}, \code{median}, and
-#' \code{sd} summarize posterior draws for \code{pi1} and \code{pi2}, and
-#' circular-shift estimates for \code{prob_higher}. Columns \code{.lower} and
-#' \code{.upper} give the corresponding highest-density interval bounds, and
-#' \code{alpha} gives the complement of the interval mass.
+#' @return A tibble with three rows of summary statistics. The \code{variable}
+#' column identifies the event probabilities in arms 1 and 2 (\code{pi1} and
+#' \code{pi2}) and the probability that the event rate in arm 2 is greater than
+#' that in arm 1 (\code{prob_higher}). The \code{mean}, \code{median}, and
+#' \code{sd} columns contain the corresponding estimates, while \code{.lower}
+#' and \code{.upper} give the lower and upper bounds of the highest posterior
+#' density interval. The \code{alpha} column gives the complement of the
+#' interval mass.
 #'
 #' @importFrom stats sd
 #' @importFrom HDInterval hdi
@@ -93,12 +93,11 @@ summary.bssd_binary <- function(object, alpha = 0.05, ...) {
 #' @param alpha Complement of the interval mass; 0.05 gives a 95% interval.
 #' @param ... Unused.
 #'
-#' @return Invisibly returns \code{NULL}. Called for the side effect of printing
-#' the mean unit-time event probabilities in the two arms and the estimated
-#' probability that the arm 2 event probability is higher, each with a
-#' highest-density interval. The comparison is estimated using circular shifts
-#' of the posterior draws. If \code{mcmc} is \code{TRUE}, the fitted Stan model
-#' is printed as well.
+#' @return No return value, called for side effects. The method prints the
+#' posterior mean event probabilities in both arms and the posterior
+#' probability that the event rate in arm 2 is greater than that in arm 1,
+#' together with their highest posterior density intervals. If
+#' \code{mcmc = TRUE}, the underlying Stan fit is also printed.
 #'
 #' @importFrom magrittr %>%
 #' @importFrom dplyr select summarise rename pull n
@@ -146,10 +145,11 @@ print.bssd_binary <- function(x, mcmc = FALSE, alpha = 0.05, ...) {
 #' @param ... The optional \code{pars} argument selects Stan parameters to
 #' extract; other arguments are unused.
 #'
-#' @return A data frame with one row per retained MCMC draw, pooled across
-#' chains. By default, columns \code{pi1} and \code{pi2} contain the
-#' unit-time event probabilities in arms 1 and 2, respectively. Supplying
-#' \code{pars} selects different parameters from the fitted Stan model.
+#' @return A data frame containing posterior draws from the Stan model.
+#' By default, the data frame contains \code{pi1} and \code{pi2}, representing
+#' the probabilities of at least one event in a single unit of time in arms 1
+#' and 2, respectively. Alternative Stan parameters can be selected using
+#' \code{pars} in \code{...}.
 #'
 #' @keywords internal
 #' @export as.data.frame.bssd_binary
@@ -167,9 +167,9 @@ as.data.frame.bssd_binary <- function(x, row.names = NULL,
 #' @param x A \code{bssd_binary} object.
 #' @param ... Unused.
 #'
-#' @return A \code{ggplot} object showing density curves for the posterior
-#' draws of the unit-time event probabilities in arms 1 and 2. Print the object
-#' to display the plot.
+#' @return A \code{ggplot} object showing the posterior density distributions
+#' of \code{pi1} and \code{pi2}, the probabilities of at least one event in a
+#' single unit of time in arms 1 and 2, respectively.
 #'
 #' @importFrom magrittr %>%
 #' @importFrom dplyr select mutate

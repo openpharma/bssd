@@ -21,8 +21,9 @@
 #' @param seed integer, used to initialize the random number generator for
 #' 'rbeta' function to add function result reproducibility.
 #'
-#' @return A numeric estimate of the probability that the active-arm event
-#' probability exceeds the placebo-arm event probability.
+#' @return A numeric scalar between 0 and 1 giving the estimated posterior
+#' probability that the adverse-event rate in the active arm (arm 2) is
+#' greater than the adverse-event rate in the placebo arm (arm 1).
 #'
 #' @importFrom stats rbeta dbinom
 #'

@@ -12,9 +12,9 @@
 \item{...}{Unused.}
 }
 \value{
-A \code{ggplot} object showing density curves for the posterior
-draws of the unit-time event probabilities in arms 1 and 2. Print the object
-to display the plot.
+A \code{ggplot} object showing the posterior density distributions
+of \code{pi1} and \code{pi2}, the probabilities of at least one event in a
+single unit of time in arms 1 and 2, respectively.
 }
 \description{
 Plot posterior event probabilities from a BSSD model.

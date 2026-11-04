@@ -22,8 +22,8 @@ test_that("forest_plot input and output is as expected.", {
                                           # reproducible result when
                                           # calling a stan function
 
-  # expect input is of class 'bssd_binary_map_pl', 'bssd_binary_map', 'bssd_map'
-  expect_s3_class(x, c("bssd_binary_map_pl", "bssd_binary_map", "bssd_map"))
+  # expect input is of class 'bssd_binary_map', 'bssd_map'
+  expect_s3_class(x, c("bssd_binary_map", "bssd_map"), exact = TRUE)
 
   # expect fit object is of class 'stanfit'
   expect_s4_class(x$fit, "stanfit")

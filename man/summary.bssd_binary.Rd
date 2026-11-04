@@ -14,14 +14,14 @@
 \item{...}{Unused.}
 }
 \value{
-A tibble with three rows. The \code{variable} column identifies
-\code{pi1} and \code{pi2} (the unit-time event probabilities in arms 1 and
-2) and \code{prob_higher} (the estimated probability that the arm 2 event
-probability exceeds that of arm 1). Columns \code{mean}, \code{median}, and
-\code{sd} summarize posterior draws for \code{pi1} and \code{pi2}, and
-circular-shift estimates for \code{prob_higher}. Columns \code{.lower} and
-\code{.upper} give the corresponding highest-density interval bounds, and
-\code{alpha} gives the complement of the interval mass.
+A tibble with three rows of summary statistics. The \code{variable}
+column identifies the event probabilities in arms 1 and 2 (\code{pi1} and
+\code{pi2}) and the probability that the event rate in arm 2 is greater than
+that in arm 1 (\code{prob_higher}). The \code{mean}, \code{median}, and
+\code{sd} columns contain the corresponding estimates, while \code{.lower}
+and \code{.upper} give the lower and upper bounds of the highest posterior
+density interval. The \code{alpha} column gives the complement of the
+interval mass.
 }
 \description{
 Summary statistics of a BSSD model.

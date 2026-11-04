@@ -14,12 +14,14 @@
 \item{...}{Unused.}
 }
 \value{
-A tibble with two rows, identified by the \code{variable} column:
-\code{mean} summarizes draws of the mean of the predictive distribution, and
-\code{pi_star} summarizes draws of the unit-time event probability in a new
-exchangeable trial. Columns \code{mean}, \code{median}, and \code{sd} give
-posterior summaries; \code{.lower} and \code{.upper} give highest-density
-interval bounds; and \code{alpha} gives the complement of the interval mass.
+A tibble with two rows of posterior summary statistics. The
+\code{variable} column identifies the mean event probability (\code{mean})
+and the meta-analytic-predictive event probability for a new exchangeable
+trial (\code{pi_star}). The \code{mean}, \code{median}, and \code{sd}
+columns summarize the corresponding posterior draws. The \code{.lower} and
+\code{.upper} columns give the lower and upper bounds of the highest
+posterior density interval, and \code{alpha} gives the complement of the
+interval mass.
 }
 \description{
 Summary statistics of a meta-analytic predictive BSSD model.

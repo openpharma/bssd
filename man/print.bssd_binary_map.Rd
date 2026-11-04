@@ -2,7 +2,7 @@
 % Please edit documentation in R/bssd_binary_map.R
 \name{print.bssd_binary_map}
 \alias{print.bssd_binary_map}
-\title{Print a meta-analytic predictive BSSD model summary.}
+\title{Print posterior summaries from the meta-analytic-predictive BSSD model.}
 \usage{
 \method{print}{bssd_binary_map}(x, mcmc = FALSE, alpha = 0.05, ...)
 }
@@ -16,13 +16,13 @@
 \item{...}{Unused.}
 }
 \value{
-Invisibly returns \code{NULL}. Called for the side effect of printing
-the posterior means and highest-density intervals for the mean of the
-predictive distribution and the unit-time event probability in a new
-exchangeable trial. If \code{mcmc} is \code{TRUE}, the fitted Stan model is
-printed as well.
+No return value, called for side effects. The method prints the
+posterior mean event probability and the meta-analytic-predictive event
+probability for a new exchangeable trial, together with their highest
+posterior density intervals. If \code{mcmc = TRUE}, the underlying Stan fit
+is also printed.
 }
 \description{
-Print a meta-analytic predictive BSSD model summary.
+Print posterior summaries from the meta-analytic-predictive BSSD model.
 }
 \keyword{internal}

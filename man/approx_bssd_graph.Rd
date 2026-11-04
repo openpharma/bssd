@@ -42,8 +42,11 @@ changed to a smaller number to fasten the computation time, but the
 estimation will be less accurate.}
 }
 \value{
-A \code{ggplot} object showing estimated safety signal levels for
-combinations of sample size and observed adverse event counts.
+A \code{ggplot} object showing the estimated probability that the
+adverse-event rate in the active arm is greater than that in the placebo
+arm for each possible number of observed participants with an adverse
+event, given the specified total time at risk. Probability levels are
+represented by color coding in the plot.
 }
 \description{
 This function creates a graph that represents all possible
