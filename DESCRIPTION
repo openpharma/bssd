@@ -82,4 +82,3 @@ VignetteBuilder: knitr
 Contact: Nils Penard [nils.penard@ucb.com]
 Config/roxygen2/version: 8.1.1
 Language: en-US
-RoxygenNote: 7.3.3
