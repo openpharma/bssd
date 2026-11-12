@@ -10,10 +10,13 @@ bssd_binary_map(fit)
 \item{fit}{instance of class \code{stanfit}.}
 }
 \value{
-list-like object with type \code{bssd_binary_map}.
+A list of class \code{bssd_binary_map} (also inheriting from
+\code{bssd_map}), containing the fitted Stan model \code{fit} and posterior
+draws of the predictive distribution's mean (\code{mean}), effective
+sample size (\code{ess}), and new-trial event probability (\code{pi_star}).
 }
 \description{
-The object in slot \code{fit} is an object of type
+The object in element \code{fit} is an object of type
 \code{stanfit} from the rstan package. The \code{pi_star} variable contains
 MCMC samples of the probability of at least one event in a single unit of
 time, suitable to form the prior for a new trial that is exchangeable with

@@ -2,28 +2,27 @@
 % Please edit documentation in R/bssd_binary.R
 \name{print.bssd_binary}
 \alias{print.bssd_binary}
-\title{Print estimated mean event rate in each arm, and the posterior probability
-that the true event rate is greater in the active arm.}
+\title{Print a BSSD model summary.}
 \usage{
 \method{print}{bssd_binary}(x, mcmc = FALSE, alpha = 0.05, ...)
 }
 \arguments{
-\item{x}{stanfit object.}
+\item{x}{A \code{bssd_binary} object.}
 
-\item{mcmc}{MCMC flag.}
+\item{mcmc}{If \code{TRUE}, also print the fitted Stan model.}
 
-\item{alpha}{if not null, 1 - alpha confidence interval is calculated.}
+\item{alpha}{Complement of the interval mass; 0.05 gives a 95\% interval.}
 
-\item{...}{extra parameters are passed to \code{\link{stan_bssd}}.}
+\item{...}{Unused.}
+}
+\value{
+No return value, called for side effects. The method prints the
+posterior mean event probabilities in both arms and the posterior
+probability that the event rate in arm 2 is greater than that in arm 1,
+together with their highest posterior density intervals. If
+\code{mcmc = TRUE}, the underlying Stan fit is also printed.
 }
 \description{
-Print estimated mean event rate in each arm, and the posterior probability
-that the true event rate is greater in the active arm.
+Print a BSSD model summary.
 }
-\keyword{#}
-\keyword{from}
-\keyword{hide}
-\keyword{index}
 \keyword{internal}
-\keyword{manual}
-\keyword{the}

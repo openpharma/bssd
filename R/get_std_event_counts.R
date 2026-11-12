@@ -27,7 +27,10 @@
 #' @param time_std numeric, the unit of time we standardize to.
 #' @param as_data_frame logical, TRUE to get results in a data-frame.
 #'
-#' @return a data-frame if \code{as_data_frame = TRUE}; else a numeric vector.
+#' @return If \code{as_data_frame = FALSE}, a numeric vector of standardized
+#' event counts. Otherwise, a tibble with the input columns \code{y}, \code{n},
+#' \code{time}, and \code{time_std}, plus \code{y_std} for the standardized
+#' event counts.
 #'
 #' @importFrom tibble tibble
 #' @export

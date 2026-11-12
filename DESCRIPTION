@@ -1,6 +1,6 @@
 Package: bssd
-Title: Bayesian Safety Signal Detection with R
-Version: 0.5.1
+Title: Bayesian Safety Signal Detection
+Version: 0.5.1.9000
 Authors@R: 
     c(
     person(given = "Kristian",

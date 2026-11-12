@@ -1,7 +1,7 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 # bssd <a href='https://github.com/openpharma/bssd'><img src='man/figures/logo.png' alt="bssd logo" align="right" width="200px" /></a>
 
-bssd: Bayesian Safety Signal Detection with R
+bssd: Bayesian Safety Signal Detection
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/openpharma/bssd/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/openpharma/bssd/actions/workflows/R-CMD-check.yaml)

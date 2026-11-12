@@ -15,7 +15,8 @@ test_that("get_std_event_counts works", {
   # Example 3 - above examples as data.frame:
   x <- get_std_event_counts(y = 1, n = 10, time = c(2, 0.5), time_std = 1,
                             as_data_frame = TRUE)
-  expect_true(is.data.frame(x))
+  expect_s3_class(x, "tbl_df")
+  expect_named(x, c("y", "n", "time", "time_std", "y_std"))
   expect_equal(x$y, c(1, 1))
   expect_equal(x$n, c(10, 10))
   expect_equal(x$time, c(2, 0.5))

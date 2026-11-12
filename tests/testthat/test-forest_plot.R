@@ -22,14 +22,15 @@ test_that("forest_plot input and output is as expected.", {
                                           # reproducible result when
                                           # calling a stan function
 
-  # expect input is of class 'bssd_binary_map_pl', 'bssd_binary_map', 'bssd_map'
-  expect_s3_class(x, c("bssd_binary_map_pl", "bssd_binary_map", "bssd_map"))
+  # expect input is of class 'bssd_binary_map', 'bssd_map'
+  expect_s3_class(x, c("bssd_binary_map", "bssd_map"), exact = TRUE)
 
   # expect fit object is of class 'stanfit'
   expect_s4_class(x$fit, "stanfit")
 
   # obtain forest plot of input data
   forest_plot <- forest_plot(x, alpha = alpha)
+  expect_s3_class(forest_plot, "ggplot")
   forest_plot
 
   # use layer_data to extract mean and quantile data from the plot

@@ -1,6 +1,6 @@
 #' Creator for class \code{bssd_binary_map}.
 #'
-#' @description The object in slot \code{fit} is an object of type
+#' @description The object in element \code{fit} is an object of type
 #' \code{stanfit} from the rstan package. The \code{pi_star} variable contains
 #' MCMC samples of the probability of at least one event in a single unit of
 #' time, suitable to form the prior for a new trial that is exchangeable with
@@ -12,7 +12,10 @@
 #'
 #' @param fit instance of class \code{stanfit}.
 #'
-#' @return list-like object with type \code{bssd_binary_map}.
+#' @return A list of class \code{bssd_binary_map} (also inheriting from
+#' \code{bssd_map}), containing the fitted Stan model \code{fit} and posterior
+#' draws of the predictive distribution's mean (\code{mean}), effective
+#' sample size (\code{ess}), and new-trial event probability (\code{pi_star}).
 #'
 #' @export
 #'
@@ -33,17 +36,26 @@ bssd_binary_map <- function(fit) {
   l
 }
 
-#' Summary statistics of the stan BSSD model.
+#' Summary statistics of a meta-analytic predictive BSSD model.
 #'
-#' @param object stanfit object.
-#' @param alpha if not null, 1 - alpha confidence interval is calculated.
-#' @param ... extra parameters are passed to \code{\link{stan_bssd}}.
+#' @param object A \code{bssd_binary_map} object.
+#' @param alpha Complement of the interval mass; 0.05 gives a 95% interval.
+#' @param ... Unused.
+#'
+#' @return A tibble with two rows of posterior summary statistics. The
+#' \code{variable} column identifies the mean event probability (\code{mean})
+#' and the meta-analytic-predictive event probability for a new exchangeable
+#' trial (\code{pi_star}). The \code{mean}, \code{median}, and \code{sd}
+#' columns summarize the corresponding posterior draws. The \code{.lower} and
+#' \code{.upper} columns give the lower and upper bounds of the highest
+#' posterior density interval, and \code{alpha} gives the complement of the
+#' interval mass.
 #'
 #' @importFrom stats sd
 #' @importFrom HDInterval hdi
 #' @importFrom dplyr bind_rows
 #' @importFrom tibble tibble
-#' @keywords internal         # hide from the manual index
+#' @keywords internal
 #' @export summary.bssd_binary_map
 #' @export
 summary.bssd_binary_map <- function(object, alpha = 0.05, ...) {
@@ -71,17 +83,22 @@ summary.bssd_binary_map <- function(object, alpha = 0.05, ...) {
 }
 
 
-#' Print estimated mean event rate in each arm, and the posterior probability
-#' that the true event rate is greater in the active arm.
+#' Print posterior summaries from the meta-analytic-predictive BSSD model.
 #'
-#' @param x stanfit object.
-#' @param mcmc MCMC flag.
-#' @param alpha if not null, 1 - alpha confidence interval is calculated.
-#' @param ... extra parameters are passed to \code{\link{stan_bssd}}.
+#' @param x A \code{bssd_binary_map} object.
+#' @param mcmc If \code{TRUE}, also print the fitted Stan model.
+#' @param alpha Complement of the interval mass; 0.05 gives a 95% interval.
+#' @param ... Unused.
+#'
+#' @return No return value, called for side effects. The method prints the
+#' posterior mean event probability and the meta-analytic-predictive event
+#' probability for a new exchangeable trial, together with their highest
+#' posterior density intervals. If \code{mcmc = TRUE}, the underlying Stan fit
+#' is also printed.
 #'
 #' @importFrom magrittr %>%
 #' @importFrom HDInterval hdi
-#' @keywords internal         # hide from the manual index
+#' @keywords internal
 #' @export print.bssd_binary_map
 #' @export
 print.bssd_binary_map <- function(x, mcmc = FALSE, alpha = 0.05, ...) {
@@ -109,14 +126,23 @@ print.bssd_binary_map <- function(x, mcmc = FALSE, alpha = 0.05, ...) {
   }
 }
 
-#' Store pi1 and pi2 values from the stan BSSD model in a dataframe.
+#' Extract posterior draws from a meta-analytic predictive BSSD model.
 #'
-#' @param x stanfit object.
-#' @param row.names row names flag.
-#' @param optional optional flag.
-#' @param ... extra parameters are passed to \code{\link{stan_bssd}}.
+#' @param x A \code{bssd_binary_map} object.
+#' @param row.names Unused.
+#' @param optional Unused.
+#' @param ... The optional \code{pars} argument selects Stan parameters to
+#' extract; other arguments are unused.
 #'
-#' @keywords internal         # hide from the manual index
+#' @return A data frame containing posterior draws from the Stan
+#' meta-analytic-predictive model. By default, it contains the historical
+#' trial event probabilities (\code{pi_h}), model parameters \code{a} and
+#' \code{b}, the effective sample size (\code{ess}), mean event probability
+#' (\code{avg}), and the predictive event probability for a new exchangeable
+#' trial (\code{pi_star}). Alternative Stan parameters can be selected using
+#' \code{pars} in \code{...}.
+#'
+#' @keywords internal
 #' @export as.data.frame.bssd_binary_map
 #' @export
 as.data.frame.bssd_binary_map <- function(x, row.names = NULL,
@@ -127,16 +153,20 @@ as.data.frame.bssd_binary_map <- function(x, row.names = NULL,
   as.data.frame(x$fit, pars = pars)
 }
 
-#' Plot stan BSSD model inferences.
+#' Plot meta-analytic predictive event probabilities.
 #'
-#' @param x stanfit object.
-#' @param ... extra parameters are passed to \code{\link{stan_bssd}}.
+#' @param x A \code{bssd_binary_map} object.
+#' @param ... Unused.
+#'
+#' @return A \code{ggplot} object showing the posterior density distributions
+#' of the mean event probability (\code{avg}) and the meta-analytic-predictive
+#' event probability for a new exchangeable trial (\code{pi_star}).
 #'
 #' @importFrom magrittr %>%
 #' @importFrom dplyr select
 #' @importFrom tidyr pivot_longer
 #' @importFrom ggplot2 ggplot aes geom_density labs
-#' @keywords internal         # hide from the manual index
+#' @keywords internal
 #' @export plot.bssd_binary_map
 #' @export
 plot.bssd_binary_map <- function(x, ...) {

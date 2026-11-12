@@ -12,7 +12,10 @@ fit_mixture(sample, ...)
 \item{...}{extra parameters are passed to \code{\link[RBesT]{automixfit}}.}
 }
 \value{
-object of type \code{\link[RBesT]{mix}}.
+A matrix-like \code{\link[RBesT]{mix}} object describing a beta
+mixture fitted to the predictive event-probability draws. Columns represent
+mixture components; rows \code{w}, \code{a}, and \code{b} contain their
+weights and beta shape parameters.
 }
 \description{
 Expectation-Maximization (EM) based fitting of beta

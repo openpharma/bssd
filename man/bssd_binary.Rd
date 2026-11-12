@@ -16,10 +16,12 @@ positive, time covariate.}
 \item{fit}{instance of class \code{stanfit}.}
 }
 \value{
-object of type \code{bssd_binary}.
+A list of class \code{bssd_binary} (also inheriting from
+\code{bssd}), containing the observed event indicators \code{y}, follow-up
+times \code{time}, and the fitted Stan model \code{fit}.
 }
 \description{
-The object in slot \code{fit} is an object of type
+The object in element \code{fit} is an object of type
 \code{stanfit} from the rstan package. It contains samples for variables
 \code{pi1} and \code{pi2}. These are the probabilities of at least one event
 in a single unit of time in arms one and two.

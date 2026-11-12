@@ -7,3 +7,4 @@
 ^pkgdown$
 ^Scratch$
 ^\.github$
+^cran-comments\.md$

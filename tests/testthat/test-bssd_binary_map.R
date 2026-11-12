@@ -155,7 +155,15 @@ test_that("as.data.frame.bssd_binary_map returns a dataframe", {
     is.data.frame(
       as.data.frame.bssd_binary_map(
         bssd_obj,
-        pars = c("pi_h", "avg", "pi_star"))))
+        pars = c("pi_h", "avg", "pi_star")
+      )
+    )
+  )
+  expect_named(
+    as.data.frame(bssd_obj),
+    c(paste0("pi_h[", seq_len(H), "]"), "a", "b", "ess", "avg", "pi_star")
+  )
+  expect_named(as.data.frame(bssd_obj, pars = "avg"), "avg")
 })
 
 test_that("plot.bssd_binary_map returns a plot", {

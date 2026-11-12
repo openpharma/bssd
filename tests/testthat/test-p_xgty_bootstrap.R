@@ -38,6 +38,21 @@ test_that("p_xgty_bootstrap output is as expected.", {
     }
 })
 
+test_that("p_xgty_bootstrap reports summaries of circular-shift proportions", {
+  x <- c(0.1, 0.2, 0.3, 0.4, 0.5)
+  y <- c(0.05, 0.15, 0.25, 0.35, 0.45)
+  proportions <- c(0.8, 0.6, 0.4, 0.2, 1)
+
+  without_interval <- p_xgty_bootstrap(x, y, alpha = NULL)
+  expect_s3_class(without_interval, "tbl_df")
+  expect_identical(dim(without_interval), c(1L, 3L))
+  expect_named(without_interval, c("mean", "median", "sd"))
+
+  with_interval <- p_xgty_bootstrap(x, y, alpha = 0.2)
+  expect_identical(dim(with_interval), c(1L, 5L))
+  expect_named(with_interval, c("mean", "median", "sd", ".lower", ".upper"))
+})
+
 test_that("p_xgty_boostrap breaks when it should.", {
 
   # create sample data for testing
