@@ -1,9 +1,9 @@
 # Creator for class `bssd_binary`.
 
-The object in slot `fit` is an object of type `stanfit` from the rstan
-package. It contains samples for variables `pi1` and `pi2`. These are
-the probabilities of at least one event in a single unit of time in arms
-one and two.
+The object in element `fit` is an object of type `stanfit` from the
+rstan package. It contains samples for variables `pi1` and `pi2`. These
+are the probabilities of at least one event in a single unit of time in
+arms one and two.
 
 ## Usage
 
@@ -29,7 +29,9 @@ bssd_binary(y, time, fit)
 
 ## Value
 
-object of type `bssd_binary`.
+A list of class `bssd_binary` (also inheriting from `bssd`), containing
+the observed event indicators `y`, follow-up times `time`, and the
+fitted Stan model `fit`.
 
 ## See also
 

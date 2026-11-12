@@ -1,6 +1,6 @@
-# Plot stan BSSD model inferences.
+# Plot meta-analytic predictive event probabilities.
 
-Plot stan BSSD model inferences.
+Plot meta-analytic predictive event probabilities.
 
 ## Usage
 
@@ -13,8 +13,14 @@ plot(x, ...)
 
 - x:
 
-  stanfit object.
+  A `bssd_binary_map` object.
 
 - ...:
 
-  extra parameters are passed to [`stan_bssd`](stan_bssd.md).
+  Unused.
+
+## Value
+
+A `ggplot` object showing the posterior density distributions of the
+mean event probability (`avg`) and the meta-analytic-predictive event
+probability for a new exchangeable trial (`pi_star`).

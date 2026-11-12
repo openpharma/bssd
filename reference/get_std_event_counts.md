@@ -34,7 +34,9 @@ get_std_event_counts(y, n, time, time_std = 1, as_data_frame = FALSE)
 
 ## Value
 
-a data-frame if `as_data_frame = TRUE`; else a numeric vector.
+If `as_data_frame = FALSE`, a numeric vector of standardized event
+counts. Otherwise, a tibble with the input columns `y`, `n`, `time`, and
+`time_std`, plus `y_std` for the standardized event counts.
 
 ## Details
 

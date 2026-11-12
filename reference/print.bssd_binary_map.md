@@ -1,7 +1,6 @@
-# Print estimated mean event rate in each arm, and the posterior probability that the true event rate is greater in the active arm.
+# Print posterior summaries from the meta-analytic-predictive BSSD model.
 
-Print estimated mean event rate in each arm, and the posterior
-probability that the true event rate is greater in the active arm.
+Print posterior summaries from the meta-analytic-predictive BSSD model.
 
 ## Usage
 
@@ -14,16 +13,24 @@ print(x, mcmc = FALSE, alpha = 0.05, ...)
 
 - x:
 
-  stanfit object.
+  A `bssd_binary_map` object.
 
 - mcmc:
 
-  MCMC flag.
+  If `TRUE`, also print the fitted Stan model.
 
 - alpha:
 
-  if not null, 1 - alpha confidence interval is calculated.
+  Complement of the interval mass; 0.05 gives a 95% interval.
 
 - ...:
 
-  extra parameters are passed to [`stan_bssd`](stan_bssd.md).
+  Unused.
+
+## Value
+
+No return value, called for side effects. The method prints the
+posterior mean event probability and the meta-analytic-predictive event
+probability for a new exchangeable trial, together with their highest
+posterior density intervals. If `mcmc = TRUE`, the underlying Stan fit
+is also printed.

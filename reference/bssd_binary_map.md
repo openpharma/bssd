@@ -1,13 +1,14 @@
 # Creator for class `bssd_binary_map`.
 
-The object in slot `fit` is an object of type `stanfit` from the rstan
-package. The `pi_star` variable contains MCMC samples of the probability
-of at least one event in a single unit of time, suitable to form the
-prior for a new trial that is exchangeable with the historical trials.
-The `ess` variable contains samples for the effective sample size of the
-distribution of pi_star. `avg` contains samples for the mean of pi_star.
-The `pi_h[i]` variables contains samples for the probability of at least
-one event in a single unit of time for historical trials 1, 2...
+The object in element `fit` is an object of type `stanfit` from the
+rstan package. The `pi_star` variable contains MCMC samples of the
+probability of at least one event in a single unit of time, suitable to
+form the prior for a new trial that is exchangeable with the historical
+trials. The `ess` variable contains samples for the effective sample
+size of the distribution of pi_star. `avg` contains samples for the mean
+of pi_star. The `pi_h[i]` variables contains samples for the probability
+of at least one event in a single unit of time for historical trials 1,
+2...
 
 ## Usage
 
@@ -23,7 +24,10 @@ bssd_binary_map(fit)
 
 ## Value
 
-list-like object with type `bssd_binary_map`.
+A list of class `bssd_binary_map` (also inheriting from `bssd_map`),
+containing the fitted Stan model `fit` and posterior draws of the
+predictive distribution's mean (`mean`), effective sample size (`ess`),
+and new-trial event probability (`pi_star`).
 
 ## See also
 

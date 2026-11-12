@@ -8,9 +8,8 @@ y-axis represents the number of participants with one AE. Risk levels,
 i.e., Pr(active AE rate \> placebo AE rate), are expressed via color
 coding: green, yellow, and red representing risk levels that would
 warrant no action, a warning, and an alert, respectively. These three
-levels are delimited by two thresholds that are set to 80% and 90% by
-default. This function assumes that all the enrolled patients are
-completers (no dropout). The threshold levels can be changed.
+levels are delimited by thresholds of 80% and 90%. This function assumes
+that all the enrolled patients are completers (no dropout).
 
 ## Usage
 
@@ -69,7 +68,11 @@ approx_bssd_graph(
 
 ## Value
 
-list, ggplot2 graph.
+A `ggplot` object showing the estimated probability that the
+adverse-event rate in the active arm is greater than that in the placebo
+arm for each possible number of observed participants with an adverse
+event, given the specified total time at risk. Probability levels are
+represented by color coding in the plot.
 
 ## Examples
 

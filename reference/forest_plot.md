@@ -24,7 +24,9 @@ forest_plot(x, alpha = 0.05, ...)
 
 ## Value
 
-ggplot plot.
+A `ggplot` object showing posterior mean unit-time event probabilities
+and equal-tailed intervals for each historical trial and the
+meta-analytic predictive distribution.
 
 ## Examples
 

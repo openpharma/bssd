@@ -41,8 +41,10 @@ p_xgty_bootstrap(x, y, offset = 0, alpha = 0.05)
 
 ## Value
 
-tibble with columns mean and sd, and also .lower and .upper, if alpha is
-not null, from the highest density posterior interval.
+A one-row tibble whose `mean`, `median`, and `sd` columns summarize the
+proportions of `x > y + offset` across circular shifts. If `alpha` is
+not `NULL`, `.lower` and `.upper` give the bounds of the highest-density
+interval for those proportions.
 
 ## Examples
 

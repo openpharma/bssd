@@ -1,6 +1,6 @@
 # bssd
 
-bssd: Bayesian Safety Signal Detection with R
+bssd: Bayesian Safety Signal Detection
 
 Sponsors have a responsibility to minimize risk to participants in
 clinical studies through safety monitoring. The FDA Final Rule for IND

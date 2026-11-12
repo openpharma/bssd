@@ -96,12 +96,12 @@ probability that the true event rate is greater in the active arm:
 ``` r
 
 fit
-#> Prob(Event) in arm 1: 0.177 (95% HPDI 0.05, 0.304)
-#> Prob(Event) in arm 2: 0.336 (95% HPDI 0.195, 0.475)
-#> Prob(Event rate in arm 2 > arm 1): 0.939 (95% HPDI 0.933, 0.945)
+#> Prob(Event) in arm 1: 0.181 (95% HPDI 0.064, 0.319)
+#> Prob(Event) in arm 2: 0.336 (95% HPDI 0.178, 0.477)
+#> Prob(Event rate in arm 2 > arm 1): 0.933 (95% HPDI 0.927, 0.939)
 ```
 
-The model is 0.939 sure that the true event rate is greater under active
+The model is 0.933 sure that the true event rate is greater under active
 arm.
 
 We can obtain summary statistics of the result data:
@@ -112,9 +112,9 @@ summary(fit)
 #> # A tibble: 3 × 7
 #>   variable     mean median      sd .lower .upper alpha
 #>   <chr>       <dbl>  <dbl>   <dbl>  <dbl>  <dbl> <dbl>
-#> 1 pi1         0.177  0.170 0.0684  0.0504  0.304  0.05
-#> 2 pi2         0.336  0.335 0.0740  0.195   0.475  0.05
-#> 3 prob_higher 0.939  0.939 0.00313 0.933   0.944  0.05
+#> 1 pi1         0.181  0.174 0.0672  0.0640  0.319  0.05
+#> 2 pi2         0.336  0.334 0.0754  0.178   0.477  0.05
+#> 3 prob_higher 0.933  0.934 0.00314 0.927   0.939  0.05
 ```
 
 We can also extract a specific value from the fit
@@ -124,7 +124,7 @@ mean for `pi1` from the previous table:
 ``` r
 
 summary(fit)$mean[summary(fit)$variable == "pi1"]
-#> [1] 0.1771715
+#> [1] 0.1805952
 ```
 
 As before, we have default methods for visualising the model inferences:

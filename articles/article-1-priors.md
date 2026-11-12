@@ -85,19 +85,19 @@ print(x$fit)
 #> post-warmup draws per chain=1000, total post-warmup draws=4000.
 #> 
 #>                 mean se_mean    sd   2.5%    25%    50%    75%  97.5% n_eff
-#> a               0.17    0.00  0.04   0.10   0.14   0.17   0.20   0.26  1166
-#> b               0.52    0.00  0.14   0.24   0.42   0.52   0.62   0.79  2741
-#> pi_h[1]         0.15    0.00  0.06   0.06   0.11   0.15   0.19   0.28  1859
-#> pi_h[2]         0.15    0.00  0.06   0.06   0.11   0.14   0.19   0.27  1469
-#> pi_h[3]         0.18    0.00  0.05   0.09   0.14   0.18   0.22   0.30  1982
-#> pi_h[4]         0.21    0.00  0.05   0.12   0.17   0.20   0.24   0.32  2317
-#> pi_h[5]         0.16    0.00  0.05   0.08   0.12   0.16   0.19   0.26  2053
-#> pi_star         0.17    0.00  0.07   0.06   0.12   0.16   0.21   0.32  1915
-#> pi_star_alpha   8.88    0.08  3.30   3.23   6.55   8.60  10.90  16.06  1631
-#> pi_star_beta   43.00    0.23 12.10  19.42  34.42  42.92  51.73  66.05  2786
-#> avg             0.17    0.00  0.04   0.10   0.14   0.17   0.20   0.26  1166
-#> ess            51.88    0.27 14.34  23.89  41.90  51.96  62.24  78.84  2741
-#> lp__          -55.93    0.06  2.24 -61.40 -57.19 -55.53 -54.27 -52.76  1378
+#> a               0.17    0.00  0.04   0.09   0.14   0.17   0.20   0.27  1295
+#> b               0.51    0.00  0.15   0.24   0.41   0.51   0.62   0.79  3162
+#> pi_h[1]         0.15    0.00  0.06   0.06   0.11   0.15   0.19   0.28  2081
+#> pi_h[2]         0.15    0.00  0.06   0.06   0.11   0.15   0.19   0.27  2096
+#> pi_h[3]         0.19    0.00  0.05   0.09   0.15   0.18   0.22   0.31  2248
+#> pi_h[4]         0.21    0.00  0.05   0.12   0.17   0.21   0.24   0.32  2714
+#> pi_h[5]         0.16    0.00  0.05   0.07   0.13   0.16   0.19   0.27  2052
+#> pi_star         0.18    0.00  0.07   0.06   0.12   0.17   0.22   0.33  2070
+#> pi_star_alpha   8.93    0.09  3.43   3.36   6.38   8.55  11.13  16.41  1505
+#> pi_star_beta   42.27    0.21 12.35  18.70  33.28  42.20  51.20  66.16  3309
+#> avg             0.17    0.00  0.04   0.09   0.14   0.17   0.20   0.27  1295
+#> ess            51.20    0.26 14.69  23.53  40.54  51.19  61.73  79.47  3162
+#> lp__          -56.03    0.07  2.31 -61.56 -57.33 -55.65 -54.31 -52.69  1127
 #>               Rhat
 #> a                1
 #> b                1
@@ -113,7 +113,7 @@ print(x$fit)
 #> ess              1
 #> lp__             1
 #> 
-#> Samples were drawn using NUTS(diag_e) at Fri Oct 16 14:14:46 2026.
+#> Samples were drawn using NUTS(diag_e) at Thu Nov 12 11:42:21 2026.
 #> For each parameter, n_eff is a crude measure of effective sample size,
 #> and Rhat is the potential scale reduction factor on split chains (at 
 #> convergence, Rhat=1).
@@ -182,14 +182,14 @@ We can inspect the mixture components:
 
 mix
 #> EM for Beta Mixture Model
-#> Log-Likelihood = 5115.438
+#> Log-Likelihood = 5067.197
 #> 
 #> Univariate beta mixture
 #> Mixture Components:
-#>   comp1    
-#> w  1.000000
-#> a  4.685179
-#> b 22.910056
+#>   comp1      comp2      comp3     
+#> w  0.4092024  0.3698248  0.2209727
+#> a 11.7524048  3.2460219  8.9771481
+#> b 47.1904828 14.9960958 62.0647641
 ```
 
 Our prior has mean:
@@ -197,7 +197,7 @@ Our prior has mean:
 ``` r
 
 sum(mix[1, ] * mix[2, ] / (mix[2, ] + mix[3, ]))
-#> [1] 0.1697822
+#> [1] 0.1753194
 ```
 
 We can pass a `Nc` parameter to
@@ -209,14 +209,14 @@ distribution, we use:
 
 fit_mixture(x, Nc = 1)
 #> EM for Beta Mixture Model
-#> Log-Likelihood = 5115.438
+#> Log-Likelihood = 5050.985
 #> 
 #> Univariate beta mixture
 #> Mixture Components:
 #>   comp1    
 #> w  1.000000
-#> a  4.685179
-#> b 22.910056
+#> a  4.825626
+#> b 22.702228
 ```
 
 ## MAP method for generating a prior from historical studies with summary-level data
@@ -259,14 +259,14 @@ This yields similar inferences to those noted above, with final prior:
 mix2 <- fit_mixture(x2)
 mix2
 #> EM for Beta Mixture Model
-#> Log-Likelihood = 5093.131
+#> Log-Likelihood = 5099.172
 #> 
 #> Univariate beta mixture
 #> Mixture Components:
-#>   comp1      comp2      comp3     
-#> w  0.4114293  0.3617510  0.2268197
-#> a 13.1348186  3.0072717 11.4620632
-#> b 52.3530471 14.3339988 81.0400338
+#>   comp1    
+#> w  1.000000
+#> a  4.789653
+#> b 22.998573
 ```
 
 i.e. a Beta mixture with mean:
@@ -274,7 +274,7 @@ i.e. a Beta mixture with mean:
 ``` r
 
 sum(mix2[1, ] * mix2[2, ] / (mix2[2, ] + mix2[3, ]))
-#> [1] 0.1733592
+#> [1] 0.1723627
 ```
 
 To force a single beta distribution, we run:
@@ -283,14 +283,14 @@ To force a single beta distribution, we run:
 
 fit_mixture(x2, Nc = 1)
 #> EM for Beta Mixture Model
-#> Log-Likelihood = 5070.025
+#> Log-Likelihood = 5099.172
 #> 
 #> Univariate beta mixture
 #> Mixture Components:
 #>   comp1    
 #> w  1.000000
-#> a  4.765199
-#> b 22.728062
+#> a  4.789653
+#> b 22.998573
 ```
 
 ## Chi-squared prior from historical studies with summary-level data

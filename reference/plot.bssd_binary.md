@@ -1,6 +1,6 @@
-# Plot stan BSSD model inferences.
+# Plot posterior event probabilities from a BSSD model.
 
-Plot stan BSSD model inferences.
+Plot posterior event probabilities from a BSSD model.
 
 ## Usage
 
@@ -13,8 +13,14 @@ plot(x, ...)
 
 - x:
 
-  stanfit object.
+  A `bssd_binary` object.
 
 - ...:
 
-  extra parameters are passed to [`stan_bssd`](stan_bssd.md).
+  Unused.
+
+## Value
+
+A `ggplot` object showing the posterior density distributions of `pi1`
+and `pi2`, the probabilities of at least one event in a single unit of
+time in arms 1 and 2, respectively.

@@ -18,7 +18,7 @@ stan_map_summary_data(y, n, time, a_alpha, a_beta, b_alpha, b_beta, ...)
 
   integer vector, number of patients in the trials.
 
-- time, :
+- time:
 
   numeric vector, strictly positive, time at risk in the trials.
 
@@ -45,7 +45,12 @@ stan_map_summary_data(y, n, time, a_alpha, a_beta, b_alpha, b_beta, ...)
 
 ## Value
 
-object of type [`bssd_binary_map`](bssd_binary_map.md).
+An object of class [`bssd_binary_map`](bssd_binary_map.md) containing
+the fitted Stan meta-analytic-predictive model. The object contains
+posterior draws for the mean unit-time event probability (`mean`), the
+effective sample size (`ess`), and the predictive unit-time event
+probability for a new exchangeable trial (`pi_star`). The `fit`
+component contains the underlying `stanfit` object.
 
 ## Details
 
@@ -107,8 +112,8 @@ x <- stan_map_summary_data(y = y, n = n, time = time,
 #> 
 #> SAMPLING FOR MODEL 'map_prior_summary_data' NOW (CHAIN 1).
 #> Chain 1: 
-#> Chain 1: Gradient evaluation took 1.8e-05 seconds
-#> Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.18 seconds.
+#> Chain 1: Gradient evaluation took 3.9e-05 seconds
+#> Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.39 seconds.
 #> Chain 1: Adjust your expectations accordingly!
 #> Chain 1: 
 #> Chain 1: 
@@ -125,9 +130,9 @@ x <- stan_map_summary_data(y = y, n = n, time = time,
 #> Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #> Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
 #> Chain 1: 
-#> Chain 1:  Elapsed Time: 0.074 seconds (Warm-up)
-#> Chain 1:                0.079 seconds (Sampling)
-#> Chain 1:                0.153 seconds (Total)
+#> Chain 1:  Elapsed Time: 0.061 seconds (Warm-up)
+#> Chain 1:                0.048 seconds (Sampling)
+#> Chain 1:                0.109 seconds (Total)
 #> Chain 1: 
 #> 
 #> SAMPLING FOR MODEL 'map_prior_summary_data' NOW (CHAIN 2).
@@ -150,9 +155,9 @@ x <- stan_map_summary_data(y = y, n = n, time = time,
 #> Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #> Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
 #> Chain 2: 
-#> Chain 2:  Elapsed Time: 0.069 seconds (Warm-up)
-#> Chain 2:                0.081 seconds (Sampling)
-#> Chain 2:                0.15 seconds (Total)
+#> Chain 2:  Elapsed Time: 0.057 seconds (Warm-up)
+#> Chain 2:                0.059 seconds (Sampling)
+#> Chain 2:                0.116 seconds (Total)
 #> Chain 2: 
 #> 
 #> SAMPLING FOR MODEL 'map_prior_summary_data' NOW (CHAIN 3).
@@ -175,15 +180,15 @@ x <- stan_map_summary_data(y = y, n = n, time = time,
 #> Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #> Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)
 #> Chain 3: 
-#> Chain 3:  Elapsed Time: 0.072 seconds (Warm-up)
-#> Chain 3:                0.076 seconds (Sampling)
-#> Chain 3:                0.148 seconds (Total)
+#> Chain 3:  Elapsed Time: 0.058 seconds (Warm-up)
+#> Chain 3:                0.066 seconds (Sampling)
+#> Chain 3:                0.124 seconds (Total)
 #> Chain 3: 
 #> 
 #> SAMPLING FOR MODEL 'map_prior_summary_data' NOW (CHAIN 4).
 #> Chain 4: 
-#> Chain 4: Gradient evaluation took 1e-05 seconds
-#> Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.1 seconds.
+#> Chain 4: Gradient evaluation took 9e-06 seconds
+#> Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.09 seconds.
 #> Chain 4: Adjust your expectations accordingly!
 #> Chain 4: 
 #> Chain 4: 
@@ -200,11 +205,11 @@ x <- stan_map_summary_data(y = y, n = n, time = time,
 #> Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #> Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
 #> Chain 4: 
-#> Chain 4:  Elapsed Time: 0.068 seconds (Warm-up)
-#> Chain 4:                0.06 seconds (Sampling)
-#> Chain 4:                0.128 seconds (Total)
+#> Chain 4:  Elapsed Time: 0.059 seconds (Warm-up)
+#> Chain 4:                0.057 seconds (Sampling)
+#> Chain 4:                0.116 seconds (Total)
 #> Chain 4: 
 x
-#> Prob(Event): Mean 0.148 (95% HPDI 0.129, 0.168)
-#> MAP Prob(Event): Mean 0.148 (95% HPDI 0.113, 0.183)
+#> Prob(Event): Mean 0.149 (95% HPDI 0.13, 0.169)
+#> MAP Prob(Event): Mean 0.149 (95% HPDI 0.114, 0.184)
 ```

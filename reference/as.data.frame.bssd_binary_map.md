@@ -1,6 +1,6 @@
-# Store pi1 and pi2 values from the stan BSSD model in a dataframe.
+# Extract posterior draws from a meta-analytic predictive BSSD model.
 
-Store pi1 and pi2 values from the stan BSSD model in a dataframe.
+Extract posterior draws from a meta-analytic predictive BSSD model.
 
 ## Usage
 
@@ -13,16 +13,26 @@ as.data.frame(x, row.names = NULL, optional = FALSE, ...)
 
 - x:
 
-  stanfit object.
+  A `bssd_binary_map` object.
 
 - row.names:
 
-  row names flag.
+  Unused.
 
 - optional:
 
-  optional flag.
+  Unused.
 
 - ...:
 
-  extra parameters are passed to [`stan_bssd`](stan_bssd.md).
+  The optional `pars` argument selects Stan parameters to extract; other
+  arguments are unused.
+
+## Value
+
+A data frame containing posterior draws from the Stan
+meta-analytic-predictive model. By default, it contains the historical
+trial event probabilities (`pi_h`), model parameters `a` and `b`, the
+effective sample size (`ess`), mean event probability (`avg`), and the
+predictive event probability for a new exchangeable trial (`pi_star`).
+Alternative Stan parameters can be selected using `pars` in `...`.

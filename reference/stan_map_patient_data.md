@@ -45,7 +45,12 @@ stan_map_patient_data(y, trial, time, a_alpha, a_beta, b_alpha, b_beta, ...)
 
 ## Value
 
-object of type [`bssd_binary_map`](bssd_binary_map.md).
+An object of class [`bssd_binary_map`](bssd_binary_map.md) containing
+the fitted Stan meta-analytic-predictive model. The object contains
+posterior draws for the mean unit-time event probability (`mean`), the
+effective sample size (`ess`), and the predictive unit-time event
+probability for a new exchangeable trial (`pi_star`). The `fit`
+component contains the underlying `stanfit` object.
 
 ## Details
 
@@ -111,6 +116,6 @@ x <- stan_map_patient_data(y = y, trial = trial, time = time,
 #> Running the chains for more iterations may help. See
 #> https://mc-stan.org/misc/warnings.html#tail-ess
 x
-#> Prob(Event): Mean 0.117 (95% HPDI 0.05, 0.188)
-#> MAP Prob(Event): Mean 0.123 (95% HPDI 0.02, 0.245)
+#> Prob(Event): Mean 0.103 (95% HPDI 0.028, 0.176)
+#> MAP Prob(Event): Mean 0.104 (95% HPDI 0.005, 0.211)
 ```

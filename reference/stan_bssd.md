@@ -88,7 +88,11 @@ stan_bssd(
 
 ## Value
 
-object of type [`bssd_binary`](bssd_binary.md).
+An object of class [`bssd_binary`](bssd_binary.md) containing the input
+event indicators (`y`), follow-up times (`time`), and the fitted Stan
+model in `fit`. The Stan model contains posterior draws for `pi1` and
+`pi2`, representing the probabilities of at least one event in one unit
+of time in arms 1 and 2, respectively.
 
 ## Examples
 
@@ -110,9 +114,15 @@ x <- stan_map_summary_data(y = y, n = n, time = time_0,
                            b_alpha = 5, b_beta = 5,
                            iter = check_iter, chains = check_chains,
                            refresh = 0)
+#> Warning: The largest R-hat is 1.05, indicating chains have not mixed.
+#> Running the chains for more iterations may help. See
+#> https://mc-stan.org/misc/warnings.html#r-hat
 #> Warning: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
 #> Running the chains for more iterations may help. See
 #> https://mc-stan.org/misc/warnings.html#bulk-ess
+#> Warning: Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.
+#> Running the chains for more iterations may help. See
+#> https://mc-stan.org/misc/warnings.html#tail-ess
 
 # Use prior in blinded BSSD analysis
 prob_arm1 <- 0.333
@@ -141,17 +151,20 @@ fit1 <- stan_bssd(y = y, time = time, prob_arm1 = prob_arm1,
 #> Running the chains for more iterations may help. See
 #> https://mc-stan.org/misc/warnings.html#bulk-ess
 fit1
-#> Prob(Event) in arm 1: 0.15 (95% HPDI 0.123, 0.182)
-#> Prob(Event) in arm 2: 0.232 (95% HPDI 0.136, 0.388)
-#> Prob(Event rate in arm 2 > arm 1): 0.908 (95% HPDI 0.892, 0.924)
+#> Prob(Event) in arm 1: 0.148 (95% HPDI 0.12, 0.178)
+#> Prob(Event) in arm 2: 0.239 (95% HPDI 0.123, 0.352)
+#> Prob(Event rate in arm 2 > arm 1): 0.927 (95% HPDI 0.908, 0.944)
 
 # Use the same prior in an unblinded BSSD analysis
 fit2 <- stan_bssd(y = y, time = time, tmt = tmt,
                   w1 = w1, pi1_alpha = pi1_alpha, pi1_beta = pi1_beta,
                   w2 = w2, pi2_alpha = pi2_alpha, pi2_beta = pi2_beta,
                   iter = check_iter, chains = check_chains, refresh = 0)
+#> Warning: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
+#> Running the chains for more iterations may help. See
+#> https://mc-stan.org/misc/warnings.html#bulk-ess
 fit2
-#> Prob(Event) in arm 1: 0.145 (95% HPDI 0.108, 0.176)
-#> Prob(Event) in arm 2: 0.251 (95% HPDI 0.146, 0.362)
-#> Prob(Event rate in arm 2 > arm 1): 0.974 (95% HPDI 0.96, 0.984)
+#> Prob(Event) in arm 1: 0.142 (95% HPDI 0.111, 0.175)
+#> Prob(Event) in arm 2: 0.259 (95% HPDI 0.145, 0.356)
+#> Prob(Event rate in arm 2 > arm 1): 0.985 (95% HPDI 0.972, 0.992)
 ```

@@ -88,7 +88,7 @@ allocation:
 ``` r
 
 fit_u
-#> Prob(Event) in arm 1: 0.201 (95% HPDI 0.102, 0.301)
-#> Prob(Event) in arm 2: 0.306 (95% HPDI 0.199, 0.411)
-#> Prob(Event rate in arm 2 > arm 1): 0.921 (95% HPDI 0.914, 0.926)
+#> Prob(Event) in arm 1: 0.203 (95% HPDI 0.104, 0.299)
+#> Prob(Event) in arm 2: 0.306 (95% HPDI 0.205, 0.415)
+#> Prob(Event rate in arm 2 > arm 1): 0.92 (95% HPDI 0.914, 0.926)
 ```
