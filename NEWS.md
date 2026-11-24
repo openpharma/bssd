@@ -1,4 +1,4 @@
-# bssd 0.5.1.9000
+# bssd 0.5.2
 
 * Clarify the package title and document the structure and meaning of exported
   function and method results.
