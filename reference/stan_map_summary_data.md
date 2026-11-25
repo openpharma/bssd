@@ -112,8 +112,8 @@ x <- stan_map_summary_data(y = y, n = n, time = time,
 #> 
 #> SAMPLING FOR MODEL 'map_prior_summary_data' NOW (CHAIN 1).
 #> Chain 1: 
-#> Chain 1: Gradient evaluation took 3.9e-05 seconds
-#> Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.39 seconds.
+#> Chain 1: Gradient evaluation took 2.1e-05 seconds
+#> Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.21 seconds.
 #> Chain 1: Adjust your expectations accordingly!
 #> Chain 1: 
 #> Chain 1: 
@@ -130,9 +130,9 @@ x <- stan_map_summary_data(y = y, n = n, time = time,
 #> Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #> Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
 #> Chain 1: 
-#> Chain 1:  Elapsed Time: 0.061 seconds (Warm-up)
-#> Chain 1:                0.048 seconds (Sampling)
-#> Chain 1:                0.109 seconds (Total)
+#> Chain 1:  Elapsed Time: 0.034 seconds (Warm-up)
+#> Chain 1:                0.027 seconds (Sampling)
+#> Chain 1:                0.061 seconds (Total)
 #> Chain 1: 
 #> 
 #> SAMPLING FOR MODEL 'map_prior_summary_data' NOW (CHAIN 2).
@@ -155,9 +155,9 @@ x <- stan_map_summary_data(y = y, n = n, time = time,
 #> Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #> Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
 #> Chain 2: 
-#> Chain 2:  Elapsed Time: 0.057 seconds (Warm-up)
-#> Chain 2:                0.059 seconds (Sampling)
-#> Chain 2:                0.116 seconds (Total)
+#> Chain 2:  Elapsed Time: 0.032 seconds (Warm-up)
+#> Chain 2:                0.033 seconds (Sampling)
+#> Chain 2:                0.065 seconds (Total)
 #> Chain 2: 
 #> 
 #> SAMPLING FOR MODEL 'map_prior_summary_data' NOW (CHAIN 3).
@@ -180,9 +180,9 @@ x <- stan_map_summary_data(y = y, n = n, time = time,
 #> Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #> Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)
 #> Chain 3: 
-#> Chain 3:  Elapsed Time: 0.058 seconds (Warm-up)
-#> Chain 3:                0.066 seconds (Sampling)
-#> Chain 3:                0.124 seconds (Total)
+#> Chain 3:  Elapsed Time: 0.033 seconds (Warm-up)
+#> Chain 3:                0.036 seconds (Sampling)
+#> Chain 3:                0.069 seconds (Total)
 #> Chain 3: 
 #> 
 #> SAMPLING FOR MODEL 'map_prior_summary_data' NOW (CHAIN 4).
@@ -205,9 +205,9 @@ x <- stan_map_summary_data(y = y, n = n, time = time,
 #> Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #> Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
 #> Chain 4: 
-#> Chain 4:  Elapsed Time: 0.059 seconds (Warm-up)
-#> Chain 4:                0.057 seconds (Sampling)
-#> Chain 4:                0.116 seconds (Total)
+#> Chain 4:  Elapsed Time: 0.033 seconds (Warm-up)
+#> Chain 4:                0.032 seconds (Sampling)
+#> Chain 4:                0.065 seconds (Total)
 #> Chain 4: 
 x
 #> Prob(Event): Mean 0.149 (95% HPDI 0.13, 0.169)
