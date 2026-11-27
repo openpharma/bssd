@@ -526,3 +526,26 @@ test_that("stan_map_summary_data with high sample size.", {
   # demonstrated that the model is estimating probability and not hazard.
 
 })
+
+test_that("stan_map_summary_data works with a single historical trial (H = 1).", {
+  fit <- suppressWarnings(
+    stan_map_summary_data(
+      y = 5,
+      n = 50,
+      time = 1,
+      a_alpha = 1 / 3,
+      a_beta = 1 / 3,
+      b_alpha = 5,
+      b_beta = 5,
+      iter = 200,
+      chains = 1,
+      refresh = 0,
+      seed = 2024
+    )
+  )
+
+  expect_s3_class(fit, c("bssd_binary_map", "bssd_map"))
+  expect_true(length(fit$pi_star) > 0)
+  expect_true(all(fit$pi_star > 0 & fit$pi_star < 1))
+  expect_true(tibble::is_tibble(summary(fit)))
+})
